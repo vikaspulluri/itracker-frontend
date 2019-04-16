@@ -1,0 +1,63 @@
+<app-sidebar></app-sidebar>
+<aside>
+  <div class="left-container">
+    <div class="instructions-container" data-if="loginCount more that 8, don't show">
+        <div class="overview-box">
+            <div class="headlines-wrap">
+                <h3>Application Overview</h3>
+                <p>Here are the list of terms you come across frequently through out this application.</p>
+            </div>
+            <div class="terms-container">
+                <div class="term">
+                    <ul>
+                        <h4>Project:</h4>
+                        <li>
+                            This application mainly aims to track projects and it's related issues
+                        </li>
+                        <li>
+                            You can create your own projects, add members to the project by clicking on 
+                            <a [routerLink]="['/projects']">Projects</a> link, where you will be shown all projects available in this 
+                            application and given an option to create your own
+                        </li>
+                        <li>
+                            If you don't want to create a project, all the issues will be tagged to 
+                            a <a [routerLink]="['/project', 'general']">General</a> project where all users of this application can have read access
+                            to the project
+                        </li>
+                    </ul>
+                    <ul>
+                        <h4>Issue:</h4>
+                        <li>
+                            You can create project related issues or general issues by clicking <a [routerLink]="[ '/issue-form']">Create Issue</a>
+                        </li>
+                        <li>
+                            You are creating an issue means, you will be having all rights to modify the issue at anytime.
+                              You can assign this issue to any member of your project or
+                            to any member of this application incase of "General" project
+                        </li>
+                        <li>
+                            If issue is tagged to project other than "General" project and project don't have any members,
+                            issue will be assigned to yourself.
+                        </li>
+                        <li>
+                            You can track all your issues in <a [routerLink]="['/issues']">Issues</a> page equipped with 
+                            multi filtered options.
+                        </li>
+                        <li>
+                            You can view the issue by accessing issue description page where you can modify the issue depends upon 
+                            your access rights.
+                        </li>
+                    </ul>
+                    <ul>
+                        <h4>Issue Previlieges:</h4>
+                        <li>You will have full control over the issue if you are the creator(reporter) of the issue.</li>
+                        <li>You can modify the issue only if you are a reporter or assignee of the issue</li>
+                        <li>If you are assigned to an issue, you are only allowed to update assignee and basic issue details</li>
+                        <li>You will have only read access to the issue if you are not a member of the project</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</aside>

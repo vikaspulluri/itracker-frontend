@@ -1,0 +1,52 @@
+@import 'variables';
+@import 'mixins';
+
+aside {
+    @include aside();
+    padding: 1.5rem;
+    .contact-container {
+        text-align: center;
+        font-family: $mont;
+        p, label {
+            color: $white;
+            font-size: 1.1rem;
+        }
+        h1 {
+            margin: 0 auto;
+          @media screen and (max-width: 900px) {
+            font-size: 1.5rem;
+          }
+        }
+        .wrapper {
+            color: darken($orange, 5%);
+            margin: 0 .5rem 2.5rem;
+            & > form {
+                max-width: 80%;
+                margin: 0 auto;
+                background: $secondary-bg;
+                padding: 2rem;
+                color: $white;
+                border-radius: .5rem;
+            }
+            .form-group {
+                text-align: left;
+                label {
+                    font-weight: 700;
+                }
+            }
+        }
+        .action-btn {
+            padding: .75rem;
+            min-width: 50%;
+            background: transparent;
+            color: $primary-pink;
+            font-size: 1.1rem;
+            border: 1px solid $primary-pink;
+            transition: .3s all ease-in-out;
+            &:hover {
+                background: darken($primary-pink, 5%);
+                color: $white;
+            }
+        }
+    } 
+}

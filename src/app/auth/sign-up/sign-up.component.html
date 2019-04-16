@@ -1,0 +1,56 @@
+<ngx-ui-loader></ngx-ui-loader>
+
+<div class="container col-xs-12 col-md-12 flex-container">
+    <!-- Welcome screen -->
+    <div class="welcome-screen">
+      <app-welcome></app-welcome>
+    </div>
+
+    <!-- Signup screen -->
+    <div class="auth-container">
+        <div class="outer-container">
+          <div class="signup-form form">
+            <div class="profile icon text-center rounded-circle">
+                <span><fa name="user-plus" size="5x"></fa></span>
+            </div>
+            <form (submit)="onSignup(signupForm)" #signupForm="ngForm">
+                <div class="form-group">
+                  <input class="form-control" type="text" name="firstname" required ngModel placeholder="First name" minlength="2" #firstname="ngModel">
+                  <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="alert alert-danger mt-1">
+                    <span *ngIf="firstname.errors.required" class="error-message">Firstname is required!!!</span>
+                    <span *ngIf="firstname.errors.minlength" class="error-message">Firstname should have atleast 2 characters!!!</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" name="lastname" ngModel required placeholder="Last name" minlength="2" #lastname="ngModel">
+                  <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="alert alert-danger mt-1">
+                    <span *ngIf="lastname.errors.required" class="error-message">Lastname is required!!!</span>
+                    <span *ngIf="lastname.errors.minlength" class="error-message">Lastname should have atleast 2 characters!!!</span>
+                  </div>
+                </div>
+      
+              <div class="form-group">
+                <input class="form-control" type="email" name="email" ngModel required email placeholder="Email" #email="ngModel">
+                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger mt-1">
+                  <span *ngIf="email.errors.required" class="error-message">Email is required!!!</span>
+                  <span *ngIf="email.errors.email" class="error-message">Valid email is required!!!</span>
+                </div>
+              </div>
+                <div class="form-group">
+                  <input class="form-control" type="password" name="password" ngModel required placeholder="Password" minlength="5" #password="ngModel">
+                  <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger mt-1">
+                    <span *ngIf="password.errors.required" class="error-message">Password is required!!!</span>
+                    <span *ngIf="password.errors.minlength" class="error-message">Password should have atleast 5 letters!!!</span>
+                  </div>
+                </div>
+              <div class="form-group">
+                <button class="btn main-btn" type="submit" name="signup-btn">Sign up</button>
+              </div>
+              <div class="additional-links">
+                <a title="Login" [routerLink]="['/login']">Already have an account? Login here</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+</div>

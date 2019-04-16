@@ -1,0 +1,40 @@
+@import 'variables';
+
+.custom-pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+}
+.custom-pagination-controls .custom-select-form {
+    position: absolute;
+    right: 0;
+    label {
+        color: $white;
+        padding: 0 .25rem;
+    }
+}
+
+.custom-pagination /deep/ .ngx-pagination .current, .custom-pagination .ngx-pagination li:not(.pagination-next):not(.pagination-previous) a:hover {
+    background: $primary-pink;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+  }
+  .custom-pagination {
+    .ngx-pagination {
+      display: block;
+      text-align: center;
+      li.disabled {
+        opacity: .2;
+      }
+      a {
+        color: $white;;
+      }
+      a:hover, button:hover {
+        background: $primary-pink;
+      }
+    }
+  }

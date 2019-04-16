@@ -1,0 +1,124 @@
+@import 'variables';
+@import 'mixins';
+
+aside {
+    @include aside();
+    padding: 1rem;
+    & > form {
+        max-width: 80%;
+        margin: 0 auto;
+        background: $secondary-bg;
+        padding: 2rem;
+        color: $white;
+        border-radius: .5rem;
+    }
+    .headline {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    .form-control {
+        @include formControl();
+        padding: 1rem;
+        height: auto;
+        color: $primary-pink;
+    }
+    input[disabled], input[disabled]:active {
+        background: $orange;
+        color: $white;
+        opacity: .5;
+        cursor: not-allowed;
+    }
+    .form-group > span {
+        span {
+            opacity: 0;
+            height: 0;
+            width: 0;
+            transition: .3s all ease-in-out;
+        }
+        fa {
+            margin: 0 .25rem;
+            &:hover {
+                &+ span {
+                    opacity: 1;
+                    height: auto;
+                    width: auto;
+                    padding: .4rem;
+                    background: $white;
+                    color: $primary-bg;
+                    z-index: 10;
+                    border-radius: .2rem;
+                }
+            }
+        }
+    }
+}
+
+input[type='file']{
+    visibility: hidden;
+}
+.image-preview{
+    height: 5rem;
+    margin: 1rem 0;
+}
+.image-preview img{
+    height: 100%;
+}
+
+.image-picker-btn {
+    padding: .75rem;
+    background: $primary-pink;
+    border: 1px dashed $white;
+    color: $white;
+    display: block;
+    transition: .3s ease-in-out;
+    &:hover {
+        background: $secondary-pink;
+        color: $black;
+    }
+}
+.remove-btn {
+    padding: .75rem;
+    background: #ff006aad;
+    color: $white;
+    margin: .5rem;
+    transition: .3s ease-in-out;
+    &:hover {
+        background: darken($primary-pink, 10%);
+        color: $white;
+    }
+}
+.btn-groups {
+    display: flex;
+    justify-content: center;
+}
+.submit-btn {
+    min-width: 150px;
+    padding: .75rem;
+    background: #28a745;
+    color: $white;
+    transition: .3s ease-in-out;
+    margin: .75rem;
+    &:hover {
+        background: darken(#28a745, 5%);
+    }
+    &.reset-btn, &.cancel-btn {
+        background: lighten(#ffc107, 15%);
+        color: $black;
+        &:hover {
+            background: #ffc107;
+            color: $white;
+        }
+    }
+}
+
+/deep/ tag-input tag {
+    padding: .8rem !important;
+}
+/deep/ tag-input-form input {
+    background-color: transparent;
+    padding: 1rem !important;
+    border: 1px solid $primary-pink !important;
+    height: auto !important;
+    margin-top: 2px;
+    border-radius: .1rem;
+}

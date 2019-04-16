@@ -1,0 +1,78 @@
+@import 'variables';
+@import 'mixins';
+
+aside {
+    @include aside();
+    padding: 1rem;
+    & > form {
+        max-width: 80%;
+        margin: 0 auto;
+        background: $secondary-bg;
+        padding: 2rem;
+        color: $white;
+        border-radius: .5rem;
+    }
+    .headline {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    .form-control {
+        @include formControl();
+        padding: 1rem;
+        height: auto;
+        color: $primary-pink;
+    }
+    input[disabled], input[disabled]:active {
+        background: $orange;
+        color: $white;
+        opacity: .8;
+        cursor: not-allowed;
+    }
+    .form-group > span {
+        span {
+            opacity: 0;
+            height: 0;
+            width: 0;
+            transition: .3s all ease-in-out;
+        }
+        fa {
+            margin: 0 .25rem;
+            &:hover {
+                &+ span {
+                    opacity: 1;
+                    height: auto;
+                    width: auto;
+                    padding: .4rem;
+                    background: $white;
+                    color: $primary-bg;
+                    z-index: 10;
+                    border-radius: .2rem;
+                }
+            }
+        }
+    }
+    .action-btn {
+        padding: 1rem;
+        color: $white;
+        background: #28a745;
+        border: none;
+        border-radius: .2rem;
+        min-width: 150px;
+        transition: .2s all ease-in;
+        &:hover {
+            background: darken(#28a745, 5%);
+        }
+    }
+}
+
+/deep/ tag-input tag {
+    padding: .8rem !important;
+}
+/deep/ tag-input-form input {
+    background-color: transparent;
+    padding: 1rem !important;
+    border: 1px solid $primary-pink !important;
+    height: auto !important;
+    margin-top: 2px;
+    border-radius: .1rem;
+}

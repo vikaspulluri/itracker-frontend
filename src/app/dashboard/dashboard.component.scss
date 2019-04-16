@@ -1,0 +1,76 @@
+@import 'variables';
+@import 'mixins';
+
+aside {
+    @include aside();
+    padding: 1rem;
+    .full-container {
+        .headline-container {
+            text-align: center;
+            h2 span {
+                text-transform: capitalize;
+            }
+        }
+    }
+    .input-box {
+        position: relative;
+    }
+    .input-box span {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        width: 50px;
+        padding: calc(.75rem + 1px);
+        background: $primary-pink;
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+        fa {
+            color: $white;
+        }
+        &:hover {
+            background: $primary-green;
+        }
+    }
+    .wrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+    .search-box {
+        @include formControl();
+        padding: .75rem;
+        margin: .75rem 0;
+    }
+    p {
+        color: $white;
+        padding: 0;
+    }
+    a {
+        color: $orange;
+        &:hover {
+            color: darken($orange, 5%);
+        }
+    }
+    .action-btn {
+        @include mainBtn();
+        margin: 0 .5rem;
+    }
+    .recommendations {
+        margin: .5rem;
+        padding: .5rem;
+        border: 1px solid $white;
+        border-radius: .2rem;
+    }
+    .table-primary {
+        & > th, & > td {
+          background-color: $secondary-pink;
+          border: 2px solid $primary-pink;
+          color: $black;
+        }
+        th {
+            cursor: pointer;
+        }
+    }
+}

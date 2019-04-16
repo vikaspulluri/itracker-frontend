@@ -1,0 +1,19 @@
+<app-sidebar></app-sidebar>
+<aside>
+  <div class="notifications">
+    <div class="notification">
+      <span class="date">Jan 31, 5:30 PM</span>
+      <a [routerLink]="['/statistics/user-id']" alt="Vikas Pulluri"><span><fa name="user"></fa></span> Vikas Pulluri</a> wants to join
+        your project <a [routerLink]="['/project/user-id']" alt="UI Development"><span><fa name="code-camp"></fa></span> UI Development</a>. Would you like to add this member?
+      <button class="action-btn btn">Accept</button>
+      <button class="btn action-btn">Reject</button>
+    </div>
+
+    <div class="notification">
+      <span class="date">Jan 31, 5:30 PM</span>
+      <a [routerLink]="['/statistics/user-id']" alt="Vikas Pulluri"><span><fa name="user"></fa></span> Vikas Pulluri</a> wants to join
+        your project <a [routerLink]="['/project/user-id']" alt="UI Development"><span><fa name="code-camp"></fa></span> UI Development</a>. Would you like to add this member?
+      <button class="action-btn btn" [disabled]="'true'">Accepted</button>
+    </div>
+  </div>
+</aside>

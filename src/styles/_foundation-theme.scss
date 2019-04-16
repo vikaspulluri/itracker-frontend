@@ -1,0 +1,52 @@
+@import "~node_modules/ngx-chips/core/styles/core/_core.scss";
+@import 'variables';
+
+$foundation-primary: $primary-pink;
+$foundation-primary-dark: darken($foundation-primary, 10%);
+
+$foundation-theme: (
+    container-border-bottom: 1px solid $foundation-primary
+);
+
+$foundation-tag-theme: (
+    background: $foundation-primary,
+    background-focused: $foundation-primary-dark,
+    background-active: $foundation-primary-dark,
+    background-hover: $foundation-primary-dark,
+    color: $white,
+    color-hover: $white,
+    border-radius: 2px
+);
+
+$foundation-icon-theme: (
+    fill: $white,
+    fill-focus: $white,
+    transition: all 0.35s
+);
+
+/deep/ .ng2-tag-input.foundation-theme {
+    @include tag-input-theme($foundation-theme);
+    border-bottom: 0px !important;
+}
+
+/deep/ .ng2-tag-input.foundation-theme tag {
+    @include tag-theme($foundation-tag-theme);
+    height: auto;
+    font-size: 1.1rem;
+    font-family: $mont;
+    margin-bottom: .25rem;
+}
+
+/deep/ .ng2-tag-input.foundation-theme tag delete-icon {
+    @include icon-theme($foundation-icon-theme);
+}
+
+/deep/ .ng2-dropdown-menu {
+    background: transparent !important;
+    text-align: center;
+    .ng2-menu-item {
+        background: $primary-pink !important;
+        font-size: 1rem !important;
+        font-family: $mont !important;
+    }
+}

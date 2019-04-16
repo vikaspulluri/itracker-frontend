@@ -1,0 +1,34 @@
+@import 'variables';
+@import 'mixins';
+
+aside {
+    @include aside();
+    padding: 1rem;
+    .notifications {
+        margin: 1rem;
+    }
+    .notification {
+        margin-bottom: 1rem;
+        padding: 1rem;
+        background: rgba(255,255,255,.9);
+        border: 1px solid $orange;
+        border-radius: .4rem;
+        color: darken($primary-bg, 5%);
+        a {
+            color: $orange;
+            &:hover {
+                color: darken($orange, 5%);
+            }
+        }
+        .action-btn {
+            background: $primary-pink;
+            color: $white;
+            font-weight: 700;
+            margin: .25rem;
+        }
+        & > span {
+            display: block;
+            text-align: right;
+        }
+    }
+}

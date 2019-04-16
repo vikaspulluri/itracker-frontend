@@ -1,0 +1,73 @@
+<aside>
+  <div class="sidebar">
+    <ul class="main-links">
+      <li>
+        <a [routerLink]="['/dashboard']" [routerLinkActive]="'active'" title="Dashboard">
+          <span><fa name="dashcube"></fa></span>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/projects']" [routerLinkActive]="'active'" title="Projects">
+          <span><fa name="briefcase"></fa></span>
+          <span>Projects</span>
+        </a>
+        <ul class="sub-links">
+          <li>
+            <a [routerLink]="['/project-form']" [routerLinkActive]="'active'" title="Create Project">
+              <span><fa name="plus"></fa></span>
+              <span>Create Project</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a [routerLink]="['/statistics']" [routerLinkActive]="'active'" title="Statistics">
+          <span><fa name="line-chart"></fa></span>
+          <span>Statistics</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/notifications']" [routerLinkActive]="'active'" title="Notifications">
+          <span><fa name="bell"></fa></span>
+          <span>Notifications</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/issues']" [routerLinkActive]="'active'" title="Issues">
+          <span><fa name="bolt"></fa></span>
+          <span>Issues</span>
+        </a>
+        <ul class="sub-links">
+          <li>
+            <a [routerLink]="['/issue-form']" [routerLinkActive]="'active'" title="Create Issue">
+              <span><fa name="plus"></fa></span>
+              <span>Create Issue</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a [routerLink]="['/contact-us']" [routerLinkActive]="'active'" title="Report problem?">
+          <span><fa name="envelope"></fa></span>
+          <span>Contact Us</span>
+        </a>
+      </li>
+    </ul>
+    <ul class="profile-links">
+      <li>
+        <a title="profile" class="dropdown">
+          <label for="profile-dropdown">
+            <fa name="user-circle"></fa>
+            <label>{{ username }}</label>
+          </label>
+          <input type="checkbox" id="profile-dropdown">
+          <div class="dropdown-content">
+            <a [routerLink]="['/user/profile']">Profile</a>
+            <a (click)="onLogout()">Logout</a>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</aside>

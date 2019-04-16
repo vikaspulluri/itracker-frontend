@@ -1,0 +1,90 @@
+@import 'variables';
+@import 'mixins';
+
+aside {
+    @include aside();
+    padding: 2rem;
+    .header {
+        text-align: center;
+    }
+    h1 {
+        text-transform: uppercase;
+    }
+    a {
+        color: $primary-pink;
+        &:hover {
+            color: darken($primary-pink, 10%);
+            text-decoration: underline;
+        }
+    }
+}
+.main-content {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    align-content: flex-start;
+    .info-container {
+        width: 35%;
+        color: #fff;
+        margin: 1rem;
+        border: 1px solid #fff;
+        height: auto;
+    }
+    .basic-info, .members .body {
+        padding: 1rem;
+        background: #333;
+        overflow: hidden;
+        overflow-y: auto;
+        max-height: 250px;
+        &> div {
+            padding: .5rem;
+            display: flex;
+        }
+    }
+    fa {
+        color: $primary-pink;
+    }
+    .head {
+        text-align: center;
+        padding: .5rem;
+        background-color: #b8daff;
+        h4 {
+            color: $black;
+            margin-bottom: 0;
+        }
+    }
+    .stats-container {
+        width: 65%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+    
+    .stat-box {
+        background: $primary-pink; // fallback color
+       @include statBox();
+       &.done {
+           background-image: $primary-green; // fallback color
+           @include addGradient($primary-green, $secondary-green);
+       }
+       &.in-progress {
+           background-image: $primary-yellow; // fallback color
+           @include addGradient($primary-yellow, $secondary-yellow);
+       }
+       &.todo {
+        @include addGradient($primary-red, $secondary-red);
+       }
+       &.in-qa {
+           @include addGradient($orange, lighten($orange, 15%));
+       }
+
+       .head {
+           padding: 1rem;
+           background-color: transparent;
+       }
+    }
+}
+
+.short-name {
+   @include shortName();
+}

@@ -1,0 +1,174 @@
+<ngx-ui-loader></ngx-ui-loader>
+
+<app-sidebar></app-sidebar>
+
+<aside>
+  <div class="headline">
+    <h1 *ngIf="mode == 'create'">Create New Issue</h1>
+    <h1 *ngIf="mode == 'edit'">Update Issue</h1>
+  </div>
+  <form [formGroup]="issueForm">
+    <!-- title field -->
+    <div class="form-group">
+      <label>Title</label>
+      <span>
+        <fa name="info-circle"></fa>
+        <span>Title of the issue</span>
+      </span>
+      <input class="form-control" type="text" [formControlName]="'title'" placeholder="title">
+    </div>
+    <!-- end title -->
+
+    <!-- description -->
+    <div class="form-group">
+      <label>Description</label>
+      <span>
+        <fa name="info-circle"></fa>
+        <span>Add some descripion about the issue</span>
+      </span>
+      <textarea [froalaEditor]="textEditorConfig" formControlName="description" title="Description" class="form-control"></textarea>
+    </div>
+    <!-- end description -->
+
+    <!-- priority -->
+    <div class="form-group">
+      <label for="priority">Priority</label>
+      <span>
+        <fa name="info-circle"></fa>
+        <span>Issue Priority</span>
+      </span>
+      <select class="form-control" id="priority" formControlName="priority">
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+        <option value="high">High</option>
+      </select>
+    </div>
+    <!-- end priority -->
+
+    <!-- attachment -->
+    <div class="form-group">
+      <label>Attachment</label>
+      <span>
+        <fa name="info-circle"></fa>
+        <span>Add optional attachment. Supports only png, jpeg, jpg</span>
+      </span>
+      <button class="image-picker-btn" type="button" (click)="imagePicker.click()">Add Attachment</button>
+      <input type="file" #imagePicker (change)="onImagePicked($event)">
+      <div class="image-preview" *ngIf="attachmentPreview !== '' && attachmentPreview">
+        <img [src]="attachmentPreview" [alt]="issueForm.value.title">
+        <button class="btn remove-btn" (click)="attachmentPreview = ''">Remove</button>
+      </div>
+    </div>
+    <!-- end attachment -->
+
+    <!-- reporter -->
+    <div class="form-group">
+      <label>Reporter</label>
+      <span>
+        <fa name="info-circle"></fa>
+        <span>Reporter of the issue</span>
+      </span>
+      <tag-input
+        formControlName="reporter"
+        name="reporter"
+        [onlyFromAutocomplete]="true"
+        [maxItems]="1"
+        theme="foundation-theme">
+        <tag-input-dropdown [autocompleteItems]="users" [showDropdownIfEmpty]="true" [keepOpen]="false">
+          </tag-input-dropdown>
+      </tag-input>
+    </div>
+    <!-- end reporter -->
+
+    <!-- project -->
+    <div class="form-group">
+      <label>Project</label>
+      <span>
+        <fa name="info-circle"></fa>
+        <span>Choose a project for the issue. Default will be selected if none choosen</span>
+      </span>
+      <tag-input 
+        formControlName="project"
+        name="project"
+        [placeholder]="'select project'"
+        [secondaryPlaceholder]="'select project'"
+        [onlyFromAutocomplete]="true"
+        [maxItems]="1"
+        theme="foundation-theme">
+        <tag-input-dropdown [autocompleteItems]="projects" [showDropdownIfEmpty]="true" [keepOpen]="false">
+          </tag-input-dropdown>
+      </tag-input>
+    </div>
+    <!-- end project -->
+
+    <!-- assignee -->
+    <div class="form-group">
+      <label>Assignee</label>
+      <span>
+        <fa name="info-circle"></fa>
+        <span>Assign the issue to any user. Assigns to reporter, if none choosen</span>
+      </span>
+      <tag-input
+        formControlName="assignee"
+        name="assignee"
+        [placeholder]="'Add assignee'"
+        [secondaryPlaceholder]="'Add assignee'"
+        [onlyFromAutocomplete]="true"
+        [maxItems]="1"
+        (onRemove)="onRemoveAssignee($event)"
+        (onAdd)="onAddAssignee($event)"
+        theme="foundation-theme">
+        <tag-input-dropdown [autocompleteItems]="users" [showDropdownIfEmpty]="true" [keepOpen]="false">
+          </tag-input-dropdown>
+      </tag-input>
+    </div>
+    <!-- end assignee -->
+
+    <!-- watchers -->
+    <div class="form-group">
+      <label>Watchers</label>
+      <span>
+        <fa name="info-circle"></fa>
+        <span>Optional, Add watchers to issue whom you want to be notified about updates</span>
+      </span>
+      <tag-input
+      formControlName="watchers"
+      name="watcher"
+      [placeholder]="'Add watcher'"
+      [secondaryPlaceholder]="'Add watcher'"
+      [onlyFromAutocomplete]="true"
+      theme="foundation-theme">
+        <tag-input-dropdown [autocompleteItems]="users" [showDropdownIfEmpty]="true" [keepOpen]="false">
+          </tag-input-dropdown>
+      </tag-input>
+    </div>
+    <!-- end watchers -->
+
+    <!-- labels -->
+    <div class="form-group">
+      <label>Labels</label>
+      <span>
+        <fa name="info-circle"></fa>
+        <span>Add some lables to your issue</span>
+      </span>
+      <tag-input
+      formControlName="labels"
+      name="label"
+      [placeholder]="'Add label'"
+      [secondaryPlaceholder]="'Add label'"
+      theme="foundation-theme">
+        <tag-input-dropdown [autocompleteItems]="labels" [keepOpen]="false">
+          </tag-input-dropdown>
+      </tag-input>
+    </div>
+    <!-- end labels -->
+
+    <!-- buttons -->
+    <div class="btn-groups">
+      <button class="btn submit-btn" (click)="onFormSubmit()">Submit</button>
+      <button class="btn submit-btn reset-btn" *ngIf="mode == 'create'">Reset</button>
+      <button class="btn submit-btn cancel-btn" *ngIf="mode== 'edit'">Cancel</button>
+    </div>
+    <!-- end buttons -->
+  </form>
+</aside>

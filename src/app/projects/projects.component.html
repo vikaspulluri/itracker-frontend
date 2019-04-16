@@ -1,0 +1,60 @@
+<ngx-ui-loader></ngx-ui-loader>
+
+<app-sidebar></app-sidebar>
+<aside>
+  <div class="projects-container">
+    <div class="header">
+      <h1>Projects</h1>
+      <button class="btn btn-success" [routerLink]="['/project-form']">Create Project</button>
+    </div>
+    <form class="filters-bar" #filtersForm="ngForm" (submit)="onFiltersSubmit(filtersForm)">
+      <input type="text" name="projectSearch" placeholder="Search by Title" ngModel>
+      <tag-input name="users" 
+        [ngModel]="user"
+        [placeholder]="'Select User'"
+        [secondaryPlaceholder]="'Select User'"
+        [onlyFromAutocomplete]="true"
+        theme="foundation-theme"
+        ngModel>
+        <tag-input-dropdown [showDropdownIfEmpty]="true" [autocompleteItems]="users" [keepOpen]="false"></tag-input-dropdown>
+      </tag-input>
+      <button class="btn" type="submit" name="filter-btn">Filter</button>
+    </form>
+    <div class="projects-list">
+      <h6>{{ projects?.length }} Results Found</h6>
+      <table class="table">
+        <thead>
+          <tr class="table-primary">
+            <th scope="col">Name</th>
+            <th scope="col">Key</th>
+            <th scope="col">Type</th>
+            <th scope="col">Lead</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-light" *ngFor="let project of projects| paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
+            <th scope="row">
+              <span><fa name="free-code-camp"></fa></span>
+              <a [routerLink]="['/project', project.projectId]">{{ project.title }}</a>
+            </th>
+            <td>{{ project.keyCode }}</td>
+            <td>{{ project.type }}</td>
+            <td>
+              <span><fa name="user"></fa></span>
+              <a [routerLink]="['/statistics', project.ownerId]" title="{{project.ownerName}}">{{project.ownerName}}</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="custom-pagination-controls">
+        <pagination-controls class="custom-pagination" (pageChange)="currentPage = $event"></pagination-controls>
+        <div class="custom-select-form">
+          <label>Records Per Page</label>
+          <select class="pagination-select" [(ngModel)]="itemsPerPage">
+            <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>

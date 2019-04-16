@@ -1,0 +1,110 @@
+@import 'variables';
+@import 'mixins';
+
+.flex-container {
+    display: flex;
+    @media screen and (max-width: 767px) {
+      flex-direction: column;
+      max-width: none;
+      margin: 0;
+      align-items: center;
+    }
+    .welcome-screen {
+        width: 65%;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        @media screen and (max-width: 767px) {
+          width: 100%;
+          margin: 1rem;
+          padding: 1rem;
+        }
+    }
+}
+.auth-container {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  @media screen and (max-width: 767px) {
+    height: auto;
+    max-width: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+  .outer-container {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 100%;
+    display: flex;
+    padding: 0 2rem;
+    justify-content: center;
+    border-radius: 5px;
+    width: calc(100% - 65% - 2rem);
+    background: $secondary-bg;
+    @include formBoxShadow();
+    @media screen and (max-width: 1024px) {
+      padding: 0rem;
+      a {
+        font-size: .9rem;
+      }
+    }
+    @media screen and (max-width: 767px) {
+      position: relative;
+      top: auto;
+      transform: none;
+      flex-direction: column;
+      padding: 0 .25rem;
+      display: block;
+      width: 90%;
+    }
+    .form {
+      display: block;
+      background-color: transparent;
+      color: $primary-pink;
+      width: 100%;
+      @media screen and (max-width: 767px) {
+        width: auto;
+        margin: 1rem;
+        border-right: none !important;
+        a {
+          font-size: .8rem;
+        }
+      }
+      a {
+          color: $primary-bg;
+      }
+      fa {
+        @include fontawesomeBig(100px);
+      }
+      label span {
+        font-size: 1.4rem;
+      }
+      form {
+        margin: .75rem auto;
+        padding: .75rem;
+      }
+    }
+    .form-control {
+      @include formControl();
+      padding: 2rem 1rem;
+    }
+    .main-btn {
+      @include mainBtn(100%);
+      padding: 1.2rem;
+    }
+    .additional-links {
+      display: flex;
+      flex-direction: column;
+      a {
+        color: $primary-pink;
+        &:hover {
+          color: $secondary-pink;
+        }
+      }
+    }
+  }
+}

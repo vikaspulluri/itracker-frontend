@@ -1,0 +1,117 @@
+<ngx-ui-loader></ngx-ui-loader>
+<app-sidebar></app-sidebar>
+<aside>
+    <div class="full-container">
+        <div class="headline-container">
+            <h2>Good <span>{{ greeting }}</span> {{ username }}<span></span></h2>
+            <p>Welcome back mate!!! Hope you are having a great day.</p>
+        </div>
+        <div class="notifications-container">
+            <div class="recommendations" [@fadeInOut]="isRecommendationsPresent">
+                <div class="content">
+                    <h2>Recommendations</h2>
+                    <p>Hi <a [routerLink]="['/user', userId]"><fa name="user"></fa>{{ userFirstName }}</a>, it seems you are new to this application. In order to make you comfortable with application,
+                        we recommend you to have a look at <a [routerLink]="[ '/overview']">Overview</a>. Don't 
+                        worry, you won't be able to see this recommendation once you are familiar with the workflow.
+                    </p>
+                    <div class="btn-group">
+                        <button class="btn action-btn" [routerLink]="['/overview']">Visit</button>
+                        <button class="btn action-btn" (click)="onCancelRecommendations()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right-container">
+            <div class="dashboard">
+                <div class="headlines">
+                    <h2>Dashboard</h2>
+                    <p>All your open issues</p>
+                </div>
+                <div class="results-wrap" *ngIf="issues">
+                    <h4 *ngIf="hasOpenIssues == false">
+                        Great Champ!!! You are all caught up. No open issues in your bucket today!!!
+                    </h4>
+                    <div class="wrap">
+                        <h6>{{ issues.length }} Results Found</h6>
+                        <div class="input-box">
+                            <input type="text" class="search-box"
+                                name="search-box" [(ngModel)]="searchTitle"
+                                placeholder="Search by title">
+                            <span (click)="getOpenIssues()">
+                                <fa name="search"></fa>
+                            </span>
+                        </div>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr class="table-primary">
+                                <th scope="col" (click)="onSortIconClick('title')">
+                                    Title
+                                    <span class="sort-icon">
+                                        <fa name="sort"></fa>
+                                    </span>
+                                </th>
+                                <th scope="col" (click)="onSortIconClick('issueId')">
+                                    Key
+                                    <span class="sort-icon">
+                                        <fa name="sort"></fa>
+                                    </span>
+                                </th>
+                                <th scope="col" (click)="onSortIconClick('reporter', 'firstName')">
+                                    Reporter
+                                    <span class="sort-icon">
+                                        <fa name="sort"></fa>
+                                    </span>
+                                </th>
+                                <th scope="col" (click)="onSortIconClick('assignee', 'firstName')">
+                                    Assignee
+                                    <span class="sort-icon">
+                                        <fa name="sort"></fa>
+                                    </span>
+                                </th>
+                                <th scope="col" (click)="onSortIconClick('createdDate')">
+                                    Created On
+                                    <span class="sort-icon">
+                                        <fa name="sort"></fa>
+                                    </span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-light" *ngFor="let issue of issues | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
+                                <th scope="row">
+                                    <a [routerLink]="['/issue', issue.issueId]" title="{{ issue.title }}">
+                                        <span><fa name="bolt"></fa></span> {{ issue.title }}</a>
+                                </th>
+                                <td>
+                                    <a [routerLink]="['/issue', issue.issueId]" title="{{ issue.title }}">
+                                        <span><fa name="bolt"></fa></span> {{ issue.issueId }}</a>
+                                </td>
+                                <td>
+                                    <a [routerLink]="['/statistics', issue.reporter.userId]" title="{{ issue.reporter.firstName }}">
+                                        <span><fa name="bolt"></fa></span> {{ issue.reporter.firstName }}</a>
+                                </td>
+                                <td>
+                                    <a [routerLink]="['/statistics', issue.assignee.userId]" title="{{ issue.assignee.firstName }}">
+                                        <span><fa name="bolt"></fa></span> {{ issue.assignee.firstName }}</a>
+                                </td>
+                                <td>
+                                    {{ issue.createdDate }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="custom-pagination-controls">
+                        <pagination-controls class="custom-pagination" (pageChange)="currentPage = $event"></pagination-controls>
+                        <div class="custom-select-form">
+                          <label>Records Per Page</label>
+                          <select class="pagination-select" [(ngModel)]="itemsPerPage">
+                            <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+                          </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>

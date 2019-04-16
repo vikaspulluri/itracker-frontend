@@ -1,0 +1,108 @@
+@import 'variables';
+@import 'mixins';
+
+aside {
+    @include aside();
+    padding: 2rem;
+    .header {
+        text-align: center;
+    }
+    .join-text {
+        text-align: center;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: calc(100% - 100% /  6);
+        h5 {
+            font-family: $mont;
+            font-weight: normal;
+        }
+        .main-btn {
+            background: $primary-pink;
+            color: $white;
+            font-weight: 700;
+        }
+    }
+    h1 {
+        text-transform: uppercase;
+    }
+}
+.main-content {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    align-content: flex-start;
+    .info-container {
+        width: 35%;
+        color: #fff;
+        margin: 1rem;
+        border: 1px solid #fff;
+        height: auto;
+    }
+    .basic-info {
+        padding: 1rem;
+        &> div {
+            padding: .5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        a {
+            color: orange;
+            &:hover {
+                color: darken(orange, 5%);
+            }
+        }
+    }
+    .members {
+        .body {
+            overflow: none;
+            overflow-y: auto;
+            padding: 0 .5rem;
+            max-height: 200px;
+        }
+    }
+    .head {
+        text-align: center;
+        padding: .5rem;
+        background-color: #b8daff;
+        h4 {
+            color: $black;
+            margin-bottom: 0;
+        }
+    }
+    .stats-container {
+        width: 65%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+    
+    .stat-box {
+        background-image: $primary-pink; // fallback color
+       @include statBox();
+       &.done {
+           background-image: $primary-green; // fallback color
+           @include addGradient($primary-green, $secondary-green);
+       }
+       &.in-progress {
+           background-image: $primary-yellow; // fallback color
+           @include addGradient($primary-yellow, $secondary-yellow);
+       }
+       &.todo {
+        @include addGradient($primary-red, $secondary-red);
+       }
+       &.in-qa {
+        @include addGradient($orange, lighten($orange, 15%));
+       }
+
+       .head {
+           padding: 1rem;
+           background-color: transparent;
+       }
+    }
+}
+
+.short-name {
+   @include shortName();
+}

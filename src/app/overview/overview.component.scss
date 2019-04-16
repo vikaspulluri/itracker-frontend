@@ -1,0 +1,37 @@
+@import 'variables';
+@import 'mixins';
+
+aside {
+    @include aside();
+    padding: 2rem;
+}
+.instructions-container {
+    color: $white;
+    margin: 1rem .5rem;
+    border: 1px solid;
+    border-radius: .25rem;
+    padding: 0 1rem;
+    .headlines-wrap {
+        margin-top: .5rem;
+        h3 {
+            text-align: center;
+        }
+    }
+    .terms-container ul {
+        padding: 0;
+        li {
+            margin: 1rem;
+        }
+    }
+    a {
+        color: $orange;
+        &:hover {
+            color: darken($orange, 5%);
+        }
+    }
+}
+
+p {
+    padding-left: 0;
+    color: $white;
+}

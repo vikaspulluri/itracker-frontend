@@ -1,0 +1,84 @@
+@import 'variables';
+@import 'mixins';
+
+aside {
+    @include aside();
+    padding: 1rem;
+    .title {
+        text-align: center;
+    }
+    .filters-wrap {
+        margin-top: 1rem;
+        form {
+            display: flex;
+            justify-content: space-evenly;
+            align-content: flex-end;
+            align-items: flex-end;
+            .action-btn {
+                background: $primary-pink;
+                color: $white;
+                border-radius: .4rem;
+            }
+            label {
+                color: $white;
+            }
+        }
+        .inputs-wrap {
+            display: flex;
+            & > div {
+                margin: 0 .5rem;
+            }
+        }
+    }
+
+    .results-wrap {
+        max-width: 80%;
+        margin: 3rem auto;
+        table {
+            color: darken($primary-bg, 5%);
+        }
+        .table-primary {
+            & > th, & > td {
+              background-color: $secondary-pink;
+              border: 2px solid $primary-pink;
+              color: $black;
+            }
+            th {
+                cursor: pointer;
+            }
+        }
+        a {
+            color: $orange;
+            font-weight: bold;
+        }
+    }
+    .input-box {
+        position: relative;
+    }
+    .input-box span {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        width: 40px;
+        padding: calc(.75rem + 1px);
+        background: $primary-pink;
+        cursor: pointer;
+        fa {
+            color: $white;
+        }
+        &:hover {
+            background: $primary-green;
+        }
+    }
+    .wrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+    .search-box {
+        @include formControl();
+        padding: .75rem;
+        margin: .75rem 0;
+    }
+}

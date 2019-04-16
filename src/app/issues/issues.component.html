@@ -1,0 +1,131 @@
+<ngx-ui-loader></ngx-ui-loader>
+
+<app-sidebar></app-sidebar>
+<aside>
+    <div class="headline-wrapper">
+        <div class="title">
+            <h1>Issues</h1>
+        </div>
+    </div>
+    <div class="filters-wrap">
+        <div class="filters">
+            <form [formGroup]="filtersForm" (ngSubmit)="onUpdateFilters()">
+                <h4>Filters:</h4>
+                <div class="inputs-wrap">
+                    <div formGroupName="userGroup">
+                        <label for="user">User</label>
+                        <select class="form-control" id="user" formControlName="userId">
+                            <option *ngFor="let user of users" [ngValue]="user.value">{{ user.display }}</option>
+                        </select>
+                    </div>
+                    <div formGroupName="issueGroup">
+                        <label for="issueType">Status</label>
+                        <select class="form-control" id="issueType" formControlName="issueType">
+                            <option *ngFor="let issue of filtersFormConfig.issueGroup" [ngValue]="issue.value">{{ issue.name }}</option>
+                        </select>
+                    </div>
+                    <div formGroupName="priorityGroup">
+                        <label for="priority">Priority</label>
+                        <select class="form-control" id="priority" formControlName="priority">
+                            <option *ngFor="let priority of filtersFormConfig.priorityGroup" [ngValue]="priority.value">{{ priority.name }}</option>
+                        </select>
+                    </div>
+                    <div formGroupName="projectGroup">
+                        <label for="projectId">Project</label>
+                        <select class="form-control" id="projectId" formControlName="projectId">
+                            <option *ngFor="let project of projects" [ngValue]="project.value">{{ project.display }}</option>
+                        </select>
+                    </div>
+                    <div formGroupName="labelGroup">
+                        <label for="label">Label</label>
+                        <select class="form-control" id="label" formControlName="label">
+                            <option *ngFor="let label of labels" [ngValue]="label.value">{{ label.name }}</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="action-btn btn" [disabled]="!filtersForm.valid">Filter</button>
+            </form>
+        </div>
+    </div>
+    <div class="results-wrap" *ngIf="issues">
+        <div class="wrap">
+            <h6>{{ issues.length }} Results Found</h6>
+            <div class="input-box">
+                <input type="text" class="search-box"
+                    name="search-box" [(ngModel)]="searchTitle"
+                    placeholder="Search by title">
+                <span (click)="getFilteredIssues()">
+                    <fa name="search"></fa>
+                </span>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr class="table-primary">
+                <th scope="col" (click)="onSortIconClick('title')">
+                    Title
+                    <span class="sort-icon">
+                        <fa name="sort"></fa>
+                    </span>
+                </th>
+                <th scope="col" (click)="onSortIconClick('issueId')">
+                    Key
+                    <span class="sort-icon">
+                        <fa name="sort"></fa>
+                    </span>
+                </th>
+                <th scope="col" (click)="onSortIconClick('reporter', 'firstName')">
+                    Reporter
+                    <span class="sort-icon">
+                        <fa name="sort"></fa>
+                    </span>
+                </th>
+                <th scope="col" (click)="onSortIconClick('assignee', 'firstName')">
+                    Assignee
+                    <span class="sort-icon">
+                        <fa name="sort"></fa>
+                    </span>
+                </th>
+                <th scope="col" (click)="onSortIconClick('createdDate')">
+                    Created On
+                    <span class="sort-icon">
+                        <fa name="sort"></fa>
+                    </span>
+                </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table-light" *ngFor="let issue of issues | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
+                    <th scope="row">
+                        <a [routerLink]="['/issue', issue.issueId]" title="{{ issue.title }}">
+                            <span><fa name="bolt"></fa></span> {{ issue.title }}</a>
+                    </th>
+                    <td>
+                        <a [routerLink]="['/issue', issue.issueId]" title="{{ issue.title }}">
+                            <span><fa name="bolt"></fa></span> {{ issue.issueId }}</a>
+                    </td>
+                    <td>
+                        <a [routerLink]="['/statistics', issue.reporter.userId]" title="{{ issue.reporter.firstName }}">
+                            <span><fa name="bolt"></fa></span> {{ issue.reporter.firstName }}</a>
+                    </td>
+                    <td>
+                        <a [routerLink]="['/statistics', issue.assignee.userId]" title="{{ issue.assignee.firstName }}">
+                            <span><fa name="bolt"></fa></span> {{ issue.assignee.firstName }}</a>
+                    </td>
+                    <td>
+                        {{ issue.createdDate }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="custom-pagination-controls">
+            <pagination-controls class="custom-pagination" (pageChange)="currentPage = $event"></pagination-controls>
+            <div class="custom-select-form">
+              <label>Records Per Page</label>
+              <select class="pagination-select" [(ngModel)]="itemsPerPage">
+                <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+              </select>
+            </div>
+        </div>
+    </div>
+</aside>

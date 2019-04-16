@@ -1,0 +1,103 @@
+<ngx-ui-loader></ngx-ui-loader>
+
+<app-sidebar></app-sidebar>
+<aside class="project-container">
+  <div class="header">
+    <div class="short-name">
+      <h2>{{ projectShortName$ }}</h2>
+    </div>
+    <div class="project-name">
+      <h1>{{ activeProject?.title }}</h1>
+    </div>
+  </div>
+  <div class="main-content">
+    <div class="info-container">
+      <div class="head">
+        <h4>Basic Info</h4>
+      </div>
+      <div class="basic-info">
+        <div>
+          <span>Lead: </span> <span><a (click)="onLeadClick()" title="{{activeProject?.ownerName}}"><span><fa name="user"></fa></span> {{ activeProject?.ownerName}}</a></span>
+        </div>
+        <div>
+          <span>Created On: </span><span>{{ activeProject?.createdDate }}</span>
+        </div>
+        <div>
+          <span>Type: </span> <span>{{ activeProject?.type }}</span>
+        </div>
+      </div>
+      <div class="members">
+        <div class="head">
+          <h4>Members</h4>
+        </div>
+        <div class="body">
+            <tag-input [ngModel]="members" 
+                        [placeholder]="'Add new member...'"
+                        [secondaryPlaceholder]="'Add new member'"
+                        [onlyFromAutocomplete]="true" 
+                        theme="foundation-theme" 
+                        [maxItems]="activeProject?.ownerId == currentUserId ? users?.length : members?.length">
+                <tag-input-dropdown [autocompleteItems]="users" [showDropdownIfEmpty]="true">
+                  </tag-input-dropdown>
+            </tag-input>
+        </div>
+      </div>
+    </div>
+    <div class="stats-container">
+      <div class="stat-box all">
+        <a [routerLink]="['/issues']" [queryParams]="{projectId: projectId$, issueType: 'all'}">
+          <div class="head">
+            <h1>{{issueStats?.totalIssues}}</h1>
+          </div>
+          <div class="footer">
+            <h6>Issues</h6>
+          </div>
+        </a>
+      </div>
+      <div class="stat-box done">
+        <a [routerLink]="['/issues']" [queryParams]="{projectId: projectId$, issueType: 'done'}">
+          <div class="head">
+            <h1>{{issueStats?.done}}</h1>
+          </div>
+          <div class="footer">
+            <h6>Done</h6>
+          </div>
+        </a>
+      </div>
+      <div class="stat-box in-qa">
+        <a [routerLink]="['/issues']" [queryParams]="{projectId: projectId$, issueType: 'qa'}">
+          <div class="head">
+            <h1>{{issueStats?.qa}}</h1>
+          </div>
+          <div class="footer">
+            <h6>In QA</h6>
+          </div>
+        </a>
+      </div>
+      <div class="stat-box in-progress">
+        <a [routerLink]="['/issues']" [queryParams]="{projectId: projectId$, issueType: 'progress'}">
+          <div class="head">
+            <h1>{{issueStats?.progress}}</h1>
+          </div>
+          <div class="footer">
+            <h6>In Progress</h6>
+          </div>
+        </a>
+      </div>
+      <div class="stat-box todo">
+        <a [routerLink]="['/issues']" [queryParams]="{projectId: projectId$, issueType: 'backlog'}">
+          <div class="head">
+            <h1>{{issueStats?.backlog}}</h1>
+          </div>
+          <div class="footer">
+            <h6>Todo</h6>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="join-text" *ngIf="isOutSider">
+    <h5>Want to Join this project? You can make a request to project lead here.</h5>
+    <button class="main-btn">Join now</button>
+  </div>
+</aside>

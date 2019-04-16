@@ -1,0 +1,117 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Ubuntu');
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~froala-editor/css/froala_editor.pkgd.min.css';
+@import '~froala-editor/css/froala_style.min.css';
+@import '~font-awesome/css/font-awesome.min.css';
+@import '~ngx-toastr/toastr-bs4-alert';
+@import 'variables';
+@import 'mixins';
+
+@import 'foundation-theme';
+@import 'custom-pagination';
+
+html, body {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  background-color: $white;
+  min-height: 100vh;
+  font-family: $mont;
+  background: $primary-bg;
+  @include customScroll();
+  h1, h2, h3, h4, h5, h6 {
+    font-family: $ubuntu;
+    font-weight: 700;
+    color: $white;
+  }
+  p, a {
+    font-family: $mont;
+    padding: 0 .5rem;
+  }
+  a {
+    color: $primary-text;
+    cursor: pointer;
+  }
+  input::placeholder {
+    opacity: 1;
+    color: $primary-pink;
+  }
+  .container {
+    background: $primary-bg;
+  }
+  .main-btn {
+    @include mainBtn();
+  }
+  div {
+    @include customScroll();
+  }
+  input, textarea {
+    &:focus, &:active {
+      outline: 1px solid $secondary-pink;
+    }
+  }
+  input[type="password"] {
+    font-family: monospace;
+  }
+  textarea {
+    resize: none;
+  }
+  input[disabled], textarea[disabled] {
+    &:focus, &:active {
+      outline: none;
+    }
+  }
+  .toast {
+    color: $white;
+    font-family: $carrois;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .toast-success {
+    background-color: green;
+  }
+  .toast-error {
+    background-color: $primary-red;
+  }
+  .toast-info {
+    background-color: $primary-pink;
+    font-weight: normal;
+    color: $white;
+  }
+  .toast-title {
+    font-size: 1.1rem;
+    text-transform: none;
+  }
+  .error-message {
+    font-size: 1rem;
+  }
+  .alert {
+    padding: 1rem;
+    text-align: center;
+    background: rgba(255,0,0,.8);
+    color: $white;
+    border: none;
+  }
+  .toast-container.toast-top-center .custom-toast, .toast-container.toast-bottom-center .custom-toast {
+    width: auto;
+    margin: 0;
+    display: block;
+    text-align: center;
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+    max-width: 500px;
+    opacity: 1;
+    @media screen and (max-width: 767px) {
+      width: 98%;
+    }
+  }
+  .fr-toolbar.fr-top {
+    border-top: none;
+  }
+}

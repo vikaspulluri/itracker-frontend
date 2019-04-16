@@ -1,0 +1,78 @@
+<ngx-ui-loader></ngx-ui-loader>
+
+<app-sidebar></app-sidebar>
+<aside class="project-container">
+    <div class="header">
+        <div class="short-name">
+            <h2>{{ userShortName$ }}</h2>
+        </div>
+        <div class="project-name">
+            <h1>{{ userName }}</h1>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="info-container">
+        <div class="head">
+            <h4>Contributions</h4>
+        </div>
+        <div class="basic-info">
+            <div *ngFor="let project of contributions">
+            <span><fa name="free-code-camp"></fa></span>
+            <a [routerLink]="['/project', project.projectId]">{{ project.title }}</a>
+            </div>
+        </div>
+        </div>
+        <div class="stats-container">
+        <div class="stat-box all">
+            <a [routerLink]="['/issues']" [queryParams]="{userId: userId$, issueType: 'all'}">
+            <div class="head">
+                <h1>{{ issueStats?.totalIssues }}</h1>
+            </div>
+            <div class="footer">
+                <h6>Issues</h6>
+            </div>
+            </a>
+        </div>
+        <div class="stat-box done">
+            <a [routerLink]="['/issues']" [queryParams]="{userId: userId$, issueType: 'done'}">
+            <div class="head">
+                <h1>{{ issueStats?.done }}</h1>
+            </div>
+            <div class="footer">
+                <h6>Done</h6>
+            </div>
+            </a>
+        </div>
+        <div class="stat-box in-qa">
+            <a [routerLink]="['/issues']" [queryParams]="{userId: userId$, issueType: 'qa'}">
+            <div class="head">
+                <h1>{{ issueStats?.qa }}</h1>
+            </div>
+            <div class="footer">
+                <h6>In QA</h6>
+            </div>
+            </a>
+        </div>
+        <div class="stat-box in-progress">
+            <a [routerLink]="['/issues']" [queryParams]="{userId: userId$, issueType: 'progress'}">
+            <div class="head">
+                <h1>{{ issueStats?.progress }}</h1>
+            </div>
+            <div class="footer">
+                <h6>In Progress</h6>
+            </div>
+            </a>
+        </div>
+        <div class="stat-box todo">
+            <a [routerLink]="['/issues']" [queryParams]="{userId: userId$, issueType: 'backlog'}">
+            <div class="head">
+                <h1>{{ issueStats?.backlog }}</h1>
+            </div>
+            <div class="footer">
+                <h6>Todo</h6>
+            </div>
+            </a>
+        </div>
+        </div>
+    </div>
+</aside>

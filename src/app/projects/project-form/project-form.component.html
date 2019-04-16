@@ -1,0 +1,57 @@
+<ngx-ui-loader></ngx-ui-loader>
+
+<app-sidebar></app-sidebar>
+<aside>
+  <div class="headline">
+    <h1>Create New Project</h1>
+  </div>
+  <form #projectForm="ngForm" (submit)="onProjectCreate(projectForm, $event)">
+    <div class="form-group">
+      <label>Title</label>
+      <span>
+        <fa name="info-circle"></fa>
+        <span>Title of the project</span>
+      </span>
+      <input class="form-control" type="text" name="title" placeholder="title" ngModel #title="ngModel" required>
+      <div *ngIf="title.invalid && (title.dirty || title.touched)" class="alert alert-danger mt-1">
+        <span *ngIf="title.errors.required" class="error-message">Title is required!!!</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="project-type">Project type</label>
+      <span>
+        <fa name="info-circle"></fa>
+        <span>Type of project</span>
+      </span>
+      <tag-input name="projectType" 
+        [ngModel]="projectType"
+        [placeholder]="'Choose project type'"
+        [secondaryPlaceholder]="'Choose project type'"
+        [onlyFromAutocomplete]="true"
+        [maxItems]="1"
+        theme="foundation-theme"
+        #type="ngModel"
+        required>
+        <tag-input-dropdown [showDropdownIfEmpty]="true" [autocompleteItems]="projectTypes"></tag-input-dropdown>
+      </tag-input>
+      <div *ngIf="type.invalid && (type.dirty || type.touched)" class="alert alert-danger mt-1">
+        <span *ngIf="type.errors.required" class="error-message">Project type is required!!!</span>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label>Members</label>
+      <span>
+        <fa name="info-circle"></fa>
+        <span>Add members to your project</span>
+      </span>
+      <tag-input [ngModel]="user" name="members" [placeholder]="'Add member'" [secondaryPlaceholder]="'Add member'" [onlyFromAutocomplete]="true" theme="foundation-theme">
+        <tag-input-dropdown [autocompleteItems]="users" [showDropdownIfEmpty]="true" [keepOpen]="false">
+        </tag-input-dropdown>
+      </tag-input>
+    </div>
+    <div class="form-group">
+      <button class="btn action-btn" type="submit" name="create">Create</button>
+    </div>
+  </form>
+</aside>

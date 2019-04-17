@@ -28,8 +28,8 @@ const routes: Routes = [
   {path: 'overview', component: OverviewComponent},
   {path: 'contact-us', component: ContactUsComponent, canActivate: [AuthGuard]},
   {path: 'not-found', component: PageNotFoundComponent},
-  {path: '**', redirectTo: '/not-found'},
-  {path: '', redirectTo: '/login', pathMatch: 'full'}
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
+  {path: '**', redirectTo: '/not-found'}
 ];
 
 @NgModule({

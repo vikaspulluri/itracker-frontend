@@ -1,19 +1,30 @@
+<ngx-ui-loader></ngx-ui-loader>
 <app-sidebar></app-sidebar>
-<aside>
-  <div class="notifications">
-    <div class="notification">
-      <span class="date">Jan 31, 5:30 PM</span>
-      <a [routerLink]="['/statistics/user-id']" alt="Vikas Pulluri"><span><fa name="user"></fa></span> Vikas Pulluri</a> wants to join
-        your project <a [routerLink]="['/project/user-id']" alt="UI Development"><span><fa name="code-camp"></fa></span> UI Development</a>. Would you like to add this member?
-      <button class="action-btn btn">Accept</button>
-      <button class="btn action-btn">Reject</button>
+<aside *ngIf="isNotificationsFetched">
+  <div class="notifications" *ngIf="notifications && notifications.length > 0;else no_notifications">
+    <div class="notification" *ngFor="let notification of notifications | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
+      <span class="date">{{ notification.createdDate }}</span>
+      <a [routerLink]="['/statistics', notification.sender.userId]" title="{{notification.sender.firstName}} {{notification.sender.lastName}}"><span><fa name="user"></fa></span> 
+        {{notification.sender.firstName}} {{notification.sender.lastName}}</a> {{notification.message}}
+        <a *ngIf="notification.type == 'project'" 
+            [routerLink]="['/project', notification.project.id]" title="{{notification.project.title}}"><span><fa name="code-camp"></fa></span> {{notification.project.title}}</a>
+            <a *ngIf="notification.type == 'issue'" 
+            [routerLink]="['/issue', notification.issue.id]" title="{{notification.issue.title}}"><span><fa name="bolt"></fa></span> {{notification.issue.title}}</a>
     </div>
-
-    <div class="notification">
-      <span class="date">Jan 31, 5:30 PM</span>
-      <a [routerLink]="['/statistics/user-id']" alt="Vikas Pulluri"><span><fa name="user"></fa></span> Vikas Pulluri</a> wants to join
-        your project <a [routerLink]="['/project/user-id']" alt="UI Development"><span><fa name="code-camp"></fa></span> UI Development</a>. Would you like to add this member?
-      <button class="action-btn btn" [disabled]="'true'">Accepted</button>
+    <div class="custom-pagination-controls">
+      <pagination-controls class="custom-pagination" (pageChange)="currentPage = $event"></pagination-controls>
+      <div class="custom-select-form">
+        <label>Records Per Page</label>
+        <select class="pagination-select" [(ngModel)]="itemsPerPage">
+          <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+        </select>
+      </div>
     </div>
   </div>
+  <ng-template #no_notifications>
+    <div class="no-result">
+        <fa name="smile-o"></fa>
+        <h2>Nothing New to show now!!!</h2>
+    </div>
+  </ng-template>
 </aside>

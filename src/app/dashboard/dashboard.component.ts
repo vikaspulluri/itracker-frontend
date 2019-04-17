@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit {
   private itemsPerPageOptions = config.customPagination.itemsPerPageOptions;
   private activeSortColumn;
   private isAscending = true;
+  public tableColumns = config.issueTableColumns.slice();
   constructor(private utilService: UtilService,
     private subService: SubscriptionService,
     private authService: AuthService,

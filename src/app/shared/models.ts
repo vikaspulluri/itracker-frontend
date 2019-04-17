@@ -61,6 +61,7 @@ export interface Notification {
     }; // incase of type == project
     sender: SimpleUser;
     receivers?: SimpleUser[];
+    createdDate?: string;
 }
 
 export interface Comment {

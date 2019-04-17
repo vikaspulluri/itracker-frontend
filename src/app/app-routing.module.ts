@@ -12,6 +12,7 @@ import { IssueFormComponent } from './issues/issue-form/issue-form.component';
 import { OverviewComponent } from './overview/overview.component';
 import { AuthGuard } from './auth/auth.guard';
 import { ProjectFormComponent } from './projects/project-form/project-form.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
@@ -26,6 +27,8 @@ const routes: Routes = [
   {path: 'project-form', component: ProjectFormComponent, canActivate: [AuthGuard]},
   {path: 'overview', component: OverviewComponent},
   {path: 'contact-us', component: ContactUsComponent, canActivate: [AuthGuard]},
+  {path: 'not-found', component: PageNotFoundComponent},
+  {path: '**', redirectTo: '/not-found'},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 

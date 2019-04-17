@@ -40,6 +40,7 @@ import { SocketService } from './shared/socket.service';
 
 // config
 import { progressBarConfig, toastrConfig } from './shared/libraries.config';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { progressBarConfig, toastrConfig } from './shared/libraries.config';
     IssueFormComponent,
     OverviewComponent,
     ProjectFormComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

@@ -45,35 +45,13 @@
                     <table class="table">
                         <thead>
                             <tr class="table-primary">
-                                <th scope="col" (click)="onSortIconClick('title')">
-                                    Title
-                                    <span class="sort-icon">
-                                        <fa name="sort"></fa>
-                                    </span>
-                                </th>
-                                <th scope="col" (click)="onSortIconClick('issueId')">
-                                    Key
-                                    <span class="sort-icon">
-                                        <fa name="sort"></fa>
-                                    </span>
-                                </th>
-                                <th scope="col" (click)="onSortIconClick('reporter', 'firstName')">
-                                    Reporter
-                                    <span class="sort-icon">
-                                        <fa name="sort"></fa>
-                                    </span>
-                                </th>
-                                <th scope="col" (click)="onSortIconClick('assignee', 'firstName')">
-                                    Assignee
-                                    <span class="sort-icon">
-                                        <fa name="sort"></fa>
-                                    </span>
-                                </th>
-                                <th scope="col" (click)="onSortIconClick('createdDate')">
-                                    Created On
-                                    <span class="sort-icon">
-                                        <fa name="sort"></fa>
-                                    </span>
+                                <th scope="col"
+                                    (click)="onSortIconClick(column.key, column.subKey)"
+                                    *ngFor="let column of tableColumns">
+                                        {{ column.value }}
+                                        <span class="sort-icon">
+                                            <fa name="sort"></fa>
+                                        </span>
                                 </th>
                             </tr>
                         </thead>

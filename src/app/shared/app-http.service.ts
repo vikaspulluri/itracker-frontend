@@ -152,7 +152,7 @@ export class AppHttpService {
             status: status,
             priority: priority
         };
-        return this.http.post(`${this.config.apiUrl}/api/notification/all`, obj);
+        return this.http.post<{error: boolean, message: string, data: Notification[]}>(`${this.config.apiUrl}/api/notification/all`, obj);
     }
 
     // ############################################################################### //

@@ -38,6 +38,7 @@ export class IssuesComponent implements OnInit {
   public itemsPerPageOptions = config.customPagination.itemsPerPageOptions;
   private isAscending = true;
   public activeSortColumn;
+  public tableColumns = config.issueTableColumns.slice();
 
   filtersForm = new FormGroup({
     userGroup: new FormGroup({

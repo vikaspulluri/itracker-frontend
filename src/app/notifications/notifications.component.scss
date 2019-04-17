@@ -3,7 +3,7 @@
 
 aside {
     @include aside();
-    padding: 1rem;
+    padding: 0rem;
     .notifications {
         margin: 1rem;
     }

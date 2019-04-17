@@ -99,7 +99,7 @@ export class IssueComponent implements OnInit {
         this.galleryImages = [{medium: this.issueDetails.imageUrl, small: this.issueDetails.imageUrl, big: this.issueDetails.imageUrl}];
       }
       this.loaderService.stop();
-    }, err => this.router.navigate(['/issues']));
+    }, err => this.router.navigate(['/not-found']));
   }
 
   getComments() {
@@ -126,7 +126,6 @@ export class IssueComponent implements OnInit {
         };
         return obj;
       });
-      console.log(this.labels);
     }, err => this.loaderService.stop());
   }
 

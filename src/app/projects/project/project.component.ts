@@ -60,7 +60,7 @@ export class ProjectComponent implements OnInit {
       this.isOutSider = !this.isMemberOfProject();
       this.loaderService.stop();
     }, err => {
-      this.router.navigate(['/projects']);
+      this.router.navigate(['/not-found']);
       return;
     });
   }

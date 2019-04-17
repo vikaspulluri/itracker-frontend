@@ -36,5 +36,12 @@ export const config = {
         itemsPerPage: 5,
         currentPage: 1,
         itemsPerPageOptions: [2, 3, 5, 8, 10]
-    }
+    },
+    issueTableColumns: [
+        {key: 'title', value: 'Title'},
+        {key: 'issueId', value: 'Key'},
+        {key: 'reporter', value: 'Reporter', subKey: 'firstName'},
+        {key: 'assignee', value: 'Assignee', subKey: 'firstName'},
+        {key: 'createdDate', value: 'Created On'}
+    ]
 };

@@ -114,4 +114,16 @@ html, body {
   .fr-toolbar.fr-top {
     border-top: none;
   }
+  .no-result {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    color: $secondary-pink;
+    height: 100vh;
+    margin: 0;
+    fa {
+        font-size: 10rem;
+    }
+  }
 }

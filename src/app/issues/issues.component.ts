@@ -38,7 +38,7 @@ export class IssuesComponent implements OnInit {
   public itemsPerPageOptions = config.customPagination.itemsPerPageOptions;
   private isAscending = true;
   public activeSortColumn;
-  public tableColumns = config.issueTableColumns.slice();
+  public tableColumns = [...config.issueTableColumns, {key: 'status', value: 'Status'}];
 
   filtersForm = new FormGroup({
     userGroup: new FormGroup({
@@ -223,6 +223,7 @@ export class IssuesComponent implements OnInit {
     this.httpService.getIssues(filters).subscribe((response: FilteredIssuesResponse) => {
       this.issues = response.data.map(issue => {
         issue.createdDate = this.utilService.formatDate(issue.createdDate, 'dateOnly');
+        issue.status = this.utilService.mapReadableStatusName(issue.status);
         return issue;
       });
       this.loaderService.stop();

@@ -261,4 +261,16 @@ export class UtilService {
         });
         return dupArr;
     }
+
+    /**
+     * mapReadableStatusName()
+     * Function that will return readable title for provided value, used in issues component
+     * @param value string
+     * @returns string
+     */
+    public mapReadableStatusName(value: string) {
+        let group = config.filtersForm.issueGroup.slice();
+        let object = group.filter(obj => obj.value === value);
+        return object[0].name || value;
+    }
 }

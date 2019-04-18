@@ -1,7 +1,7 @@
 <ngx-ui-loader></ngx-ui-loader>
 
 <app-sidebar></app-sidebar>
-<aside class="project-container">
+<aside class="project-container" *ngIf="userShortName$">
     <div class="header">
         <div class="short-name">
             <h2>{{ userShortName$ }}</h2>

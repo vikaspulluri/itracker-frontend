@@ -1,6 +1,27 @@
 <ngx-ui-loader></ngx-ui-loader>
 <app-sidebar></app-sidebar>
 <aside *ngIf="isNotificationsFetched">
+  <div class="filters">
+    <div class="left">
+      <div class="status-group">
+        <h5>Status:</h5>
+        <label class="radio-container" *ngFor="let input of status">
+          <input type="radio" class="radio-btn" name="status" [value]="input.value" [checked]="activeStatus==input.value" (change)="onStatusChange($event)"><span>{{input.title}}</span>
+          <span class="check"></span>
+        </label>
+      </div>
+      <div class="priority-group">
+        <h5>Priority:</h5>
+        <label class="radio-container" *ngFor="let input of priority">
+          <input type="radio" class="radio-btn" name="priority" [value]="input.value" [checked]="activePriority==input.value" (change)="onPriorityChange($event)"><span>{{input.title}}</span>
+          <span class="check"></span>
+        </label>
+      </div>
+    </div>
+    <div class="right">
+      <button class="action-btn" (click)="onClearAllNotifications()" title="All unread notifications will be marked as read">clear all notifications</button>
+    </div>
+  </div>
   <div class="notifications" *ngIf="notifications && notifications.length > 0;else no_notifications">
     <div class="notification" *ngFor="let notification of notifications | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
       <span class="date">{{ notification.createdDate }}</span>
@@ -24,7 +45,7 @@
   <ng-template #no_notifications>
     <div class="no-result">
         <fa name="smile-o"></fa>
-        <h2>Nothing New to show now!!!</h2>
+        <h2>No Result Found!!!</h2>
     </div>
   </ng-template>
 </aside>

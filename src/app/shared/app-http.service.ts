@@ -155,6 +155,12 @@ export class AppHttpService {
         return this.http.post<{error: boolean, message: string, data: Notification[]}>(`${this.config.apiUrl}/api/notification/all`, obj);
     }
 
+    public updateNotification(data?: {criteria: string, notificationId: string}) {
+        let postObj = data ? data : {};
+        return this.http.post<{error: boolean, message: string, data: {}}>
+            (`${this.config.apiUrl}/api/notification/update`, postObj);
+    }
+
     // ############################################################################### //
     // *************************** COMMENTS MANAGEMENT ******************************* //
     // ############################################################################### //

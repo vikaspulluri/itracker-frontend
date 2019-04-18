@@ -47,6 +47,7 @@ export interface Issue {
 }
 
 export interface Notification {
+    _id?: string; // notification id present in response
     message: string;
     type: string; // issue or project or other
     status: string; // unread or read or later

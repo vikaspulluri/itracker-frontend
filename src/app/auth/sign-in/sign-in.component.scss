@@ -59,7 +59,7 @@
       a {
           color: $primary-bg;
       }
-      fa {
+      .profile fa {
         @include fontawesomeBig(100px);
       }
       label span {
@@ -88,5 +88,8 @@
         }
       }
     }
+  }
+  .submit-btn-group {
+    text-align: center;
   }
 }

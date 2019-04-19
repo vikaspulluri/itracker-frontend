@@ -15,6 +15,10 @@ aside {
         &:focus {
           outline: 1px solid $primary-pink;
         }
+        @media screen and (max-width: 768px) {
+          padding: .5rem;
+          width: 30%;
+        }
       }
       tag-input {
         position: relative;
@@ -28,6 +32,10 @@ aside {
         color: $white;
         &:hover {
           background: $secondary-pink;
+        }
+        @media screen and (max-width: 768px) {
+          padding: .5rem;
+          min-width: unset;
         }
       }
     }
@@ -71,5 +79,9 @@ aside {
   height: auto !important;
   margin-top: 2px;
   border-radius: .1rem;
+  @media screen and (max-width: 768px) {
+    padding: .5rem !important;
+    width: 30vw !important;
+  }
 }
 

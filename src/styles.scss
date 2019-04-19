@@ -29,6 +29,11 @@ html, body {
     font-weight: 700;
     color: $white;
   }
+  @media screen and (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+  }
   p, a {
     font-family: $mont;
     padding: 0 .5rem;

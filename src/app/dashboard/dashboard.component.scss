@@ -32,6 +32,9 @@ aside {
         &:hover {
             background: $primary-green;
         }
+        @media screen and (max-width: 768px) {
+            padding: calc(.35rem + 1px);
+        }
     }
     .wrap {
         display: flex;
@@ -42,6 +45,10 @@ aside {
         @include formControl();
         padding: .75rem;
         margin: .75rem 0;
+        @media screen and (max-width: 768px) {
+            padding: .35rem 0;
+            margin: .35rem 0;
+        }
     }
     p {
         color: $white;
@@ -75,5 +82,10 @@ aside {
     }
     .sort-icon fa {
         opacity: .5;
+    }
+    @media screen and (max-width: 500px) {
+        h2 {
+            font-size: 1.5rem;
+        }
     }
 }

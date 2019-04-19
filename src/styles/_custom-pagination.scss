@@ -5,10 +5,20 @@
     justify-content: center;
     align-items: flex-start;
     position: relative;
+    @media screen and (max-width: 768px) {
+      display: block;
+      text-align: center;
+    }
 }
 .custom-pagination-controls .custom-select-form {
     position: absolute;
     right: 0;
+    @media screen and (max-width: 768px) {
+      position: relative;
+      display: block;
+      text-align: center;
+      font-size: .8rem;
+    }
     label {
         color: $white;
         padding: 0 .25rem;
@@ -27,6 +37,7 @@
     .ngx-pagination {
       display: block;
       text-align: center;
+      padding-left: 0;
       li.disabled {
         opacity: .2;
       }

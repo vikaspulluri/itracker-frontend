@@ -2,25 +2,7 @@
 @import 'mixins';
 
 .flex-container {
-    display: flex;
-    @media screen and (max-width: 767px) {
-      flex-direction: column;
-      max-width: none;
-      margin: 0;
-      align-items: center;
-    }
-    .welcome-screen {
-        width: 65%;
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-        display: flex;
-        @media screen and (max-width: 767px) {
-          width: 100%;
-          margin: 1rem;
-          padding: 1rem;
-        }
-    }
+  @include flexContainer();
 }
 .auth-container {
   height: 100vh;

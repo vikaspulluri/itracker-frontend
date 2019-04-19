@@ -30,6 +30,14 @@
     width: 90%;
     padding: 4rem;
     min-height: 100vh;
+    @media screen and (max-width: 768px) {
+        max-width: 100%;
+        padding: 2rem;
+        width: 100%;
+        position: relative;
+        left: 0;
+        margin: 0 auto 70px;
+    }
 }
 
 @mixin shortName() {
@@ -107,5 +115,27 @@
     &::-webkit-scrollbar-thumb {
         background-color: $orange;
         outline: 1px solid $orange;
+    }
+}
+
+@mixin flexContainer() {
+    display: flex;
+    @media screen and (max-width: 767px) {
+      flex-direction: column;
+      max-width: none;
+      margin: 0;
+      align-items: center;
+    }
+    .welcome-screen {
+        width: 65%;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        @media screen and (max-width: 767px) {
+          width: 100%;
+          margin: 1rem;
+          padding: 1rem;
+        }
     }
 }

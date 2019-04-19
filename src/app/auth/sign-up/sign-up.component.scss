@@ -1,62 +1,9 @@
-@import 'variables';
 @import 'mixins';
-
-.flex-container {
-    display: flex;
-    .welcome-screen {
-        width: 65%;
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-        display: flex;
-    }
-}
-
 .auth-container {
-  min-height: 100vh;
-  height: 100%;
-  margin: 0;
-  padding: 1rem;
-  width: calc(100% - 65% - 2rem);
-  display: flex;
-  align-items: center;
   .outer-container {
-    width: 100%;
-    .signup-form {
-      display: block;
-      background-color: $secondary-bg;
-      color: $primary-pink;
-      border-radius: 1rem;
-      width: 100%;
-      @include formBoxShadow();
-      fa { 
-        @include fontawesomeBig(90px);
-        border: none;
-      }
-      .fa {
-        margin-top: .8rem;
-      }
-      a {
-        color: $primary-pink;
-        &:hover {
-          color: $secondary-pink;
-        }
-      }
-      form {
-        margin: .75rem auto;
-        padding: .75rem;
-        label span {
-          font-size: 1.4rem;
-        }
-      }
-      .form-control {
-        @include formControl();
-        padding: 2rem 1rem;
-      }
-      .main-btn {
-        @include mainBtn(100%);
-        padding: 1.2rem;
-      }
+    .form fa {
+      width: auto;
+      border: 0px;
     }
   }
 }

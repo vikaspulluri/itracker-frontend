@@ -126,8 +126,20 @@ html, body {
     left: 50%;
     transform: translateX(-50%);
     top: 0;
+    @media screen and (max-width: 767px) {
+      position: relative;
+      left: 0;
+      transform: none;
+      margin: 0 .5rem;
+      text-align: center;
+    }
     fa {
         font-size: 10rem;
+    }
+  }
+  .table-responsive {
+    @media screen and (min-width: 767px) {
+      display: table;
     }
   }
 }

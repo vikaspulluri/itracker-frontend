@@ -1,6 +1,7 @@
 @import 'variables';
-a {
+h3 {
     color: $orange;
+    cursor: pointer;
     &:hover {
         color: darken($orange, 5%);
     }

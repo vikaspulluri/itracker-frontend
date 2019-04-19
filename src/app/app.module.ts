@@ -62,8 +62,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
     AuthModule,
+    AppRoutingModule,
     AngularFontAwesomeModule,
     TagInputModule,
     FormsModule,

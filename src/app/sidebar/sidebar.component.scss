@@ -46,9 +46,17 @@ aside {
         width: 50vw;
         left: -50%;
         padding-left: 0;
+        list-style: none;
         li {
           padding: .5rem;
           text-align: left;
+        }
+      }
+      .other .sub-menu {
+        left: unset;
+        right: 0;
+        li {
+          text-align: right;
         }
       }
       li {
@@ -67,6 +75,8 @@ aside {
     background: darken($primary-bg, 15%);
     min-height: 100vh;
     text-align: center;
+    position: fixed;
+    top: 0;
     @media screen and (min-width: 769px) and (max-width: 1299px) {
       display: inline-block;
     }

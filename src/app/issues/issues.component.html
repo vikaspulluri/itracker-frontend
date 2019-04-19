@@ -84,11 +84,11 @@
                     </td>
                     <td>
                         <a [routerLink]="['/statistics', issue.reporter.userId]" title="{{ issue.reporter.firstName }}">
-                            <span><fa name="bolt"></fa></span> {{ issue.reporter.firstName }}</a>
+                            <span><fa name="user"></fa></span> {{ issue.reporter.firstName }}</a>
                     </td>
                     <td>
                         <a [routerLink]="['/statistics', issue.assignee.userId]" title="{{ issue.assignee.firstName }}">
-                            <span><fa name="bolt"></fa></span> {{ issue.assignee.firstName }}</a>
+                            <span><fa name="user"></fa></span> {{ issue.assignee.firstName }}</a>
                     </td>
                     <td>
                         {{ issue.createdDate }}

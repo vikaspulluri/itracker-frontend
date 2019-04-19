@@ -11,6 +11,9 @@ aside {
         padding: 2rem;
         color: $white;
         border-radius: .5rem;
+        @media screen and (max-width: 500px) {
+            max-width: 95%;
+        }
     }
     .headline {
         text-align: center;

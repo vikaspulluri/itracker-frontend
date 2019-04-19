@@ -14,10 +14,16 @@ aside {
             justify-content: space-evenly;
             align-content: flex-end;
             align-items: flex-end;
+            @media screen and (max-width: 768px) {
+                display: block;
+            }
             .action-btn {
                 background: $primary-pink;
                 color: $white;
                 border-radius: .4rem;
+                @media screen and (max-width: 768px) {
+                    margin-top: 1rem;
+                }
             }
             label {
                 color: $white;
@@ -28,12 +34,18 @@ aside {
             & > div {
                 margin: 0 .5rem;
             }
+            @media screen and (max-width: 768px) {
+                flex-wrap: wrap;
+            }
         }
     }
 
     .results-wrap {
         max-width: 80%;
         margin: 3rem auto;
+        @media screen and (max-width: 768px) {
+            max-width: 90%;
+        }
         table {
             color: darken($primary-bg, 5%);
         }

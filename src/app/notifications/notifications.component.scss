@@ -13,13 +13,27 @@ aside {
         padding: 1.5rem;
         justify-content: space-between;
         color: $white;
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
+            padding: 1rem;
+        }
         .left {
             width: calc(75% - 3rem);
             display: flex;
             justify-content: space-evenly;
+            @media screen and (max-width: 768px) {
+                width: calc(100% - 3rem);
+                flex-direction: column;
+                .status-group, .priority-group {
+                    margin: 1rem 0;
+                }
+            }
         }
         .right {
             width: calc(25% - 3rem);
+            @media screen and (max-width: 768px) {
+                width: calc(100% - 3rem);
+            }
         }
         h5 {
             display: inline-block;

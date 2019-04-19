@@ -44,14 +44,24 @@ aside {
             width: calc(50% - 2rem);
             display: flex;
             flex-direction: column;
+            @media screen and (max-width: 768px) {
+                width: calc(100% - 2rem);
+            }
             div {
                 padding: .5rem;
             }
+        }
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
+            margin: 2rem .25rem;
         }
         .left, .right {
             & > div > span:first-child {
                 display: inline-block;
                 min-width: 30%;
+                @media screen and (max-width: 768px) {
+                    min-width: 40%;
+                }
             }
             a {
                 padding: 0;
@@ -95,13 +105,23 @@ aside {
         &>div:first-child {
             width: 49%;
             margin-right: 1%;
+            @media screen and (max-width: 768px) {
+                width: 99%;
+            }
             h4 {
                 margin-left: .5rem;
             }
         }
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
+            justify-content: center;
+        }
     }
     .watchers-wrap {
         max-width: 30%;
+        @media screen and (max-width: 768px) {
+            max-width: 99%;
+        }
         h4 {display: inline;}
         fa + span {
             opacity: 0;
@@ -146,10 +166,16 @@ aside {
     // Activity and comments styles
     .activities-wrap {
         display: flex;
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
+        }
     }
     .activities-wrap > div {
         max-width: 49%;
         margin-right: 1%;
+        @media screen and (max-width: 768px) {
+            max-width: 99%;
+        }
     }
     
     .comments-wrap {
@@ -231,5 +257,10 @@ aside {
     }
     p.error {
         background: red;
+    }
+    @media screen and (max-width: 767px) {
+        .basic-details-wrap {
+            text-align: center;
+        }
     }
 }

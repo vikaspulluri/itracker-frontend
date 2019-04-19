@@ -128,11 +128,19 @@
             </li>
           </ul>
         </li>
-        <li>
-          <a [routerLink]="['/contact-us']">
-            <span><fa name="envelope"></fa></span>
-            <span>Contact</span>
-          </a>
+        <li class="other">
+          <div>
+            <span><fa name="briefcase"></fa></span>
+            <span>Other</span>
+          </div>
+          <ul class="sub-menu">
+            <li>
+              <a [routerLink]="['/contact-us']">Contact Us</a>
+            </li>
+            <li>
+              <a [routerLink]="['/overview']">Overview</a>
+            </li>
+          </ul>
         </li>
       </ul>
     </nav>

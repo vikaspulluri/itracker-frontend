@@ -23,12 +23,19 @@ aside {
     width: 100%;
     align-items: flex-start;
     align-content: flex-start;
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+    }
     .info-container {
         width: 35%;
         color: #fff;
         margin: 1rem;
         border: 1px solid #fff;
         height: auto;
+        @media screen and (max-width: 768px) {
+            width: 90%;
+            margin: 0 auto;
+        }
     }
     .basic-info, .members .body {
         padding: 1rem;
@@ -58,6 +65,9 @@ aside {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
+        @media screen and (max-width: 768px) {
+            width: 98%;
+        }
     }
     
     .stat-box {

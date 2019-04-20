@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { User, AuthInfo, LoginResponse, SignUpResponse } from './user.model';
@@ -6,6 +6,9 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SocketService } from '../../shared/socket.service';
+import { authConfig } from '../auth.config';
+
+declare const gapi: any;
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -17,9 +20,11 @@ export class AuthService {
   private username;
   private loginCount;
   private config = environment;
+  private isSocialAuthUser: any;
+  private auth2;
 
   constructor(private http: HttpClient, private router: Router, private toastrService: ToastrService,
-    private socketService: SocketService) {}
+    private socketService: SocketService, private ngZone: NgZone) {}
 
   getToken() {
     return this.token;
@@ -27,6 +32,10 @@ export class AuthService {
 
   getUsername() {
     return this.username || '';
+  }
+
+  getIsSocialAuthUser() {
+    return this.isSocialAuthUser;
   }
 
   getUserFirstName() {
@@ -52,6 +61,43 @@ export class AuthService {
     return parseInt(this.loginCount, 10) || 0;
   }
 
+  /** Social Login */
+  public googleInit() {
+    gapi.load('auth2', () => {
+      this.auth2 = gapi.auth2.init(authConfig.googleAuthConfig);
+      this.attachGoogleAuthHandler(document.getElementById('google-btn'));
+    });
+  }
+  public attachGoogleAuthHandler(element) {
+    this.auth2.attachClickHandler(element, {},
+      (googleUser) => {
+
+        let profile = googleUser.getBasicProfile();
+        let username = profile.getName().split(' ');
+        let obj = {
+          email: profile.getEmail(),
+          firstName: username[0],
+          lastName: username[1]
+        };
+        this.socialLogin(obj).subscribe(response => {
+          if (response && response.data) {
+            this.toastrService.success(response.message);
+            this.setAuthInfo(response);
+            const userData = {
+              authToken: this.getToken(),
+            };
+            this.socketService.setUser(userData);
+            this.socketService.setWatcher();
+            this.ngZone.run(() => this.router.navigate(['/dashboard']));
+          }
+        }, err => {
+          console.log(err);
+        });
+      }, (error) => {
+        console.log(JSON.stringify(error, undefined, 2));
+      });
+  }
+
   setAuthInfo(response: LoginResponse) {
     const expiresInDuration = response.data.expiryDuration;
     this.token = response.data.token;
@@ -59,10 +105,11 @@ export class AuthService {
     this.username = response.data.username;
     this.userId = response.data.userId;
     this.loginCount = response.data.loginCount;
+    this.isSocialAuthUser = response.data.isSocialAuthUser;
     this.setAuthTimer(expiresInDuration);
     const now = new Date();
     const expiration = new Date(now.getTime() + expiresInDuration * 1000);
-    this.saveAuthData(this.token, expiration, response.data.userId, response.data.username, this.loginCount);
+    this.saveAuthData(this.token, expiration, response.data.userId, response.data.username, this.loginCount, this.isSocialAuthUser);
     this.authStatusListener.next(true);
   }
 
@@ -73,7 +120,14 @@ export class AuthService {
     const authData: AuthInfo = {email: email, password: password};
     return this.http.post<LoginResponse>(`${this.config.apiUrl}/api/user/login`, authData);
   }
+  socialLogin(data) {
+    return this.http.post<LoginResponse>(`${this.config.apiUrl}/api/user/social-login`, data);
+  }
   logout() {
+    // tslint:disable-next-line:triple-equals
+    if (this.getIsSocialAuthUser() == 'true') {
+      gapi.auth2.getAuthInstance().auth2.signOut().then(() => console.log('signed out'));
+    }
     this.token = null;
     this.isAuthenticated = false;
     this.authStatusListener.next(false);
@@ -81,7 +135,7 @@ export class AuthService {
     clearTimeout(this.tokenTimer);
     this.userId = null;
     this.socketService.disconnectSocket(this.getToken());
-    this.router.navigate(['/']);
+    this.ngZone.run(() => this.router.navigate(['/']));
   }
 
   autoAuthUser() {
@@ -89,6 +143,7 @@ export class AuthService {
     if (!authInfo) {
       return;
     }
+    this.googleInit();
     const userData = {authToken: authInfo.token};
     this.socketService.setUser(userData);
     const now = new Date();
@@ -99,18 +154,21 @@ export class AuthService {
       this.userId = authInfo.userId;
       this.username = authInfo.username;
       this.loginCount = authInfo.loginCount;
+      this.isSocialAuthUser = authInfo.isSocialAuthUser;
       this.setAuthTimer(expiresIn / 1000);
       this.authStatusListener.next(true);
       this.socketService.setWatcher();
     }
   }
 
-  private saveAuthData(token: string, expirationDate: Date, userId: string, username: string, loginCount: number) {
+  private saveAuthData(token: string, expirationDate: Date, userId: string,
+      username: string, loginCount: number, isSocialAuthUser: boolean) {
     localStorage.setItem('token', token);
     localStorage.setItem('expiration', expirationDate.toISOString());
     localStorage.setItem('userId', userId);
     localStorage.setItem('username', username);
     localStorage.setItem('loginCount', '' + loginCount);
+    localStorage.setItem('isSocialAuthUser', isSocialAuthUser.toString());
   }
 
   public updateAuthData(username: string) {
@@ -132,6 +190,7 @@ export class AuthService {
     localStorage.removeItem('userId');
     localStorage.removeItem('username');
     localStorage.removeItem('loginCount');
+    localStorage.removeItem('isSocialAuthUser');
   }
 
   private getAuthData() {
@@ -140,6 +199,7 @@ export class AuthService {
     const userId = localStorage.getItem('userId');
     const username = localStorage.getItem('username');
     const loginCount = localStorage.getItem('loginCount');
+    const isSocialAuthUser = localStorage.getItem('isSocialAuthUser');
     if (!token || !expiration) {
       return;
     }
@@ -148,7 +208,8 @@ export class AuthService {
       expiration: new Date(expiration),
       userId: userId,
       username: username,
-      loginCount: loginCount
+      loginCount: loginCount,
+      isSocialAuthUser: isSocialAuthUser
     };
   }
 

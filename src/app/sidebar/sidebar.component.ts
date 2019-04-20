@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { AuthService } from '../auth/shared/auth.service';
 import { SocketService } from '../shared/socket.service';
 import { SubscriptionService } from '../shared/subscription.service';
@@ -18,7 +18,6 @@ export class SidebarComponent implements OnInit {
     this.username = this.authService.getUsername();
     this.subscriptionService.receiveNotification();
   }
-
 
   onLogout() {
     this.authService.logout();

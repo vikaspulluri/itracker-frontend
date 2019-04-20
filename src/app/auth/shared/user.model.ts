@@ -24,7 +24,8 @@ export interface LoginResponse extends Response {
         token: string,
         username: string,
         loginCount: string,
-        userId: string
+        userId: string,
+        isSocialAuthUser?: boolean
     };
 }
 

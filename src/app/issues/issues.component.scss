@@ -41,10 +41,9 @@ aside {
     }
 
     .results-wrap {
-        max-width: 80%;
         margin: 3rem auto;
         @media screen and (max-width: 768px) {
-            max-width: 90%;
+            max-width: 95%;
         }
         table {
             color: darken($primary-bg, 5%);

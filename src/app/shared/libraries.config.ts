@@ -30,7 +30,7 @@ export const progressBarConfig: NgxUiLoaderConfig = {
 };
 
 export const toastrConfig = {
-    timeOut: 5000,
+    timeOut: 8000,
     extendedTimeOut: 2000,
     closeButton: true,
     preventDuplicates: true,

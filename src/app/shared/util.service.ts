@@ -273,4 +273,18 @@ export class UtilService {
         let object = group.filter(obj => obj.value === value);
         return object[0].name || value;
     }
+
+    /**
+     * removeCharsFromString()
+     * Function that removes given substring and returns remaining part
+     * @param mainString string
+     * @param searchString string
+     */
+    public removeCharsFromString(mainString: string, searchString: string) {
+        let index = mainString.indexOf(searchString);
+        if (index > -1) {
+            return mainString.replace(mainString.slice(index), '');
+        }
+        return mainString;
+    }
 }

@@ -152,9 +152,14 @@
     </div>
   </div>
 
-  <div class="gallery-wrap" *ngIf="galleryImages">
-      <h4>Attachments</h4>
-    <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+  <div class="gallery-wrap">
+    <h4>Attachments</h4>
+    <div *ngIf="galleryImages">
+      <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+    </div>
+    <div *ngIf="!galleryImages">
+        <p>----------None attached-----------</p>
+    </div>
   </div>
 
   <!-- Comments and activity wrap -->

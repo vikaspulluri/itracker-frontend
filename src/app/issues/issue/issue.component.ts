@@ -35,6 +35,7 @@ export class IssueComponent implements OnInit {
   public isAssigneeEditing = false; // will be updated when user clicks on edit icon beside assignee
   public issueComment; // two way binding with comment editor
   public allComments; // holds all comments of issue
+  public attachmentPreview; // attachment thumbnail
   constructor(private route: ActivatedRoute,
     private router: Router,
     private utilService: UtilService,
@@ -151,7 +152,7 @@ export class IssueComponent implements OnInit {
 
       // update issue with assignee
       this.loaderService.start();
-      this.httpService.updateIssueAssignee(this.issueDetails.assignee, this.issueDetails.issueId).subscribe(response => {
+      this.httpService.updateIssue(this.issueDetails.issueId, 'assignee', this.issueDetails.assignee).subscribe(response => {
         this.toastrService.success(response.message);
         this.loaderService.stop();
         const defaultMsg = '*** has updated the assignee for ###';
@@ -185,7 +186,7 @@ export class IssueComponent implements OnInit {
     let currentWatchers = this.issueDetails.formWatchers || [];
     let updatedWatchersTagFormat = [$event, ...currentWatchers];
     let updatedWatchers = this.utilService.unmapUserDataFromForm(updatedWatchersTagFormat);
-    this.httpService.updateWatchers(this.issueDetails.issueId, updatedWatchers).subscribe(response => {
+    this.httpService.updateIssue(this.issueDetails.issueId, 'watchers', updatedWatchers).subscribe(response => {
       this.loaderService.stop();
       this.issueDetails.formWatchers = updatedWatchersTagFormat;
       this.issueDetails.watchers = this.utilService.unmapUserDataFromForm(this.issueDetails.formWatchers);
@@ -210,7 +211,7 @@ export class IssueComponent implements OnInit {
       this.loaderService.start();
       this.issueDetails.formWatchers.splice(index, 1);
       let updatedUsers = this.utilService.unmapUserDataFromForm(this.issueDetails.formWatchers);
-      this.httpService.updateWatchers(this.issueDetails.issueId, updatedUsers).subscribe(response => {
+      this.httpService.updateIssue(this.issueId, 'watchers', updatedUsers).subscribe(response => {
         this.loaderService.stop();
         this.issueDetails.watchers = updatedUsers;
         let defaultMsg = '*** has removed a watcher from ###';
@@ -234,7 +235,7 @@ export class IssueComponent implements OnInit {
     this.loaderService.start();
     let currentLabels = this.issueDetails.labels || [];
     let updatedLabels = [$event.value, ...currentLabels];
-    this.httpService.updateLabels(this.issueDetails.issueId, updatedLabels).subscribe(response => {
+    this.httpService.updateIssue(this.issueId, 'labels', updatedLabels).subscribe(response => {
       this.loaderService.stop();
       this.issueDetails.labels = updatedLabels;
       const defaultMsg = '*** has added new label to ###';
@@ -253,7 +254,7 @@ export class IssueComponent implements OnInit {
     let index = currentLabels.findIndex(label => label === updatedLabel);
     if (index > -1) {
       this.issueDetails.labels.splice(index, 1);
-      this.httpService.updateLabels(this.issueDetails.issueId, this.issueDetails.labels).subscribe(response => {
+      this.httpService.updateIssue(this.issueId, 'labels', this.issueDetails.labels).subscribe(response => {
         this.loaderService.stop();
         const defaultMsg = '*** has removed a label from ###';
         // realtime message to watchers
@@ -297,7 +298,13 @@ export class IssueComponent implements OnInit {
   }
 
   onUpdateIssueDescription() {
-    console.log(this.issueDetails.description);
+    this.loaderService.start();
+    let updatedDescription = this.issueDetails.description;
+    updatedDescription = this.utilService.removeCharsFromString(updatedDescription, 'Powered by');
+    this.httpService.updateIssue(this.issueId, 'description', updatedDescription).subscribe(response => {
+      this.loaderService.stop();
+      this.toastrService.success(response.message);
+    }, err => this.loaderService.stop());
   }
 
   onAddComment() {
@@ -317,6 +324,7 @@ export class IssueComponent implements OnInit {
       this.issueComment = '';
     }, err => this.loaderService.stop());
   }
+
 
   // ############################################################################### //
   // *************************** UTILITY METHODS *********************************** //

@@ -121,7 +121,7 @@ export class IssueFormComponent implements OnInit {
     this.loaderService.start();
     let issue: Issue = {
       title: this.issueForm.value.title,
-      description: this.issueForm.value.description,
+      description: this.utilService.removeCharsFromString(this.issueForm.value.description, 'Powered by'),
       priority: this.issueForm.value.priority,
       project: {
         projectId: this.issueForm.value.project[0].value,

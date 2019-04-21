@@ -91,40 +91,13 @@ export class AppHttpService {
         return this.http.post<IssueStatsResponse>(`${this.config.apiUrl}/api/issue/stats`, data);
     }
 
-    public updateIssueAssignee(user: SimpleUser, issueId: string) {
-        let obj = {
-            updateField: 'assignee',
-            content: user,
-            issueId: issueId
-        };
-        return this.http.post<Response>(`${this.config.apiUrl}/api/issue/update`, obj);
-    }
-
-    public updateWatchers(issueId: string, users: SimpleUser[]) {
-        let obj = {
-            updateField: 'watchers',
-            content: users,
-            issueId: issueId
-        };
-        return this.http.post(`${this.config.apiUrl}/api/issue/update`, obj);
-    }
-
-    public updateLabels(issueId: string, labels: string[]) {
-        let obj = {
-            updateField: 'labels',
-            content: labels,
-            issueId: issueId
-        };
-        return this.http.post(`${this.config.apiUrl}/api/issue/update`, obj);
-    }
-
     public updateIssue(issueId: string, fieldName: string, value) {
         let obj = {
             updateField: fieldName,
             content: value,
             issueId: issueId
         };
-        return this.http.post(`${this.config.apiUrl}/api/issue/update`, obj);
+        return this.http.post<Response>(`${this.config.apiUrl}/api/issue/update`, obj);
     }
 
     // function that gets all watching issue ids of current user

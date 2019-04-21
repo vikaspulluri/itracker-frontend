@@ -108,8 +108,15 @@ aside {
         &>div:first-child {
             width: 49%;
             margin-right: 1%;
+            position: relative;
             @media screen and (max-width: 768px) {
                 width: 99%;
+            }
+            .action-btn {
+                position: absolute;
+                bottom: 1rem;
+                right: .5rem;
+                z-index: 1;
             }
             h4 {
                 margin-left: .5rem;

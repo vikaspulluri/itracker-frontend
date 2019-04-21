@@ -162,6 +162,14 @@ export class IssueComponent implements OnInit {
         this.updateIssueActivity(this.issueDetails.issueId, `${this.authService.getUsername()} updated assignee`);
       }, err => this.loaderService.stop());
 
+      // need to update watchers list also since new assignee here
+      let currentWatchers = this.issueDetails.formWatchers || [];
+      let currentAssignee = this.issueDetails.formAssignee[0];
+      let isAssigneeAlreadyWatching = currentWatchers.find(user => user.value === currentAssignee.value);
+      if (!isAssigneeAlreadyWatching) {
+        currentAssignee.readonly = true;
+        this.onAddWatcher(currentAssignee);
+      }
     }
   }
 
@@ -286,6 +294,10 @@ export class IssueComponent implements OnInit {
       this.updateIssueActivity(this.issueDetails.issueId,
           `${this.authService.getUsername()} updated status to ${this.issueDetails.status}`);
     }, err => this.loaderService.stop());
+  }
+
+  onUpdateIssueDescription() {
+    console.log(this.issueDetails.description);
   }
 
   onAddComment() {

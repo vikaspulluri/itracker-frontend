@@ -119,6 +119,7 @@
     <div class="description-wrap">
       <h4>Description</h4>
       <p [froalaEditor]="textEditorConfig" [(froalaModel)]="issueDetails.description"></p>
+      <button class="btn action-btn" (click)="onUpdateIssueDescription()" *ngIf="isReporter()">Update</button>
     </div>
     <div class="watchers-wrap">
       <h4>Watchers</h4>

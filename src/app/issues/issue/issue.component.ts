@@ -308,7 +308,7 @@ export class IssueComponent implements OnInit {
   }
 
   onAddComment() {
-    let summary = this.issueComment;
+    let summary = this.utilService.removeCharsFromString(this.issueComment, 'Powered by');
     if (!summary) { return; }
     this.loaderService.start();
     let comment: Comment = {

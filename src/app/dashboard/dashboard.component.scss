@@ -40,6 +40,10 @@ aside {
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
+        @media screen and (max-width: 768px) {
+            align-items: flex-start;
+            flex-direction: column-reverse;
+        }
     }
     .search-box {
         @include formControl();
@@ -53,6 +57,9 @@ aside {
     p {
         color: $white;
         padding: 0;
+        @media screen and (max-width: 768px) {
+            font-size: .8rem;
+        }
     }
     a {
         color: $orange;
@@ -82,6 +89,12 @@ aside {
     }
     .sort-icon fa {
         opacity: .5;
+    }
+    .results-wrap h4 {
+        @media screen and (max-width: 768px) {
+            font-size: 1rem;
+            font-weight: normal;
+        }
     }
     @media screen and (max-width: 500px) {
         h2 {

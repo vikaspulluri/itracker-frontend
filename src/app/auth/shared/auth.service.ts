@@ -65,7 +65,8 @@ export class AuthService {
   public googleInit() {
     gapi.load('auth2', () => {
       this.auth2 = gapi.auth2.init(authConfig.googleAuthConfig);
-      this.attachGoogleAuthHandler(document.getElementById('google-btn'));
+      const signInBtn = document.getElementById('google-btn');
+      if (signInBtn) {this.attachGoogleAuthHandler(signInBtn);}
     });
   }
   public attachGoogleAuthHandler(element) {

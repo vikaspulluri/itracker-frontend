@@ -23,6 +23,9 @@ aside {
                 border-radius: .4rem;
                 @media screen and (max-width: 768px) {
                     margin-top: 1rem;
+                    width: calc(100% - 1rem);
+                    position: relative;
+                    left: .5rem;
                 }
             }
             label {
@@ -35,7 +38,7 @@ aside {
                 margin: 0 .5rem;
             }
             @media screen and (max-width: 768px) {
-                flex-wrap: wrap;
+                flex-direction: column;
             }
         }
     }
@@ -75,22 +78,34 @@ aside {
         padding: calc(.75rem + 1px);
         background: $primary-pink;
         cursor: pointer;
+        text-align: center;
         fa {
             color: $white;
         }
         &:hover {
             background: $primary-green;
         }
+        @media screen and (max-width: 768px) {
+            padding: calc(.5rem + 1px);
+        }
     }
     .wrap {
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
+        @media screen and (max-width: 768px) {
+            flex-direction: column-reverse;
+            align-items: flex-start;
+        }
     }
     .search-box {
         @include formControl();
         padding: .75rem;
         margin: .75rem 0;
+        @media screen and (max-width: 768px) {
+            padding: .5rem;
+            margin: .5rem 0;
+        }
     }
     .sort-icon fa {
         opacity: .5;

@@ -37,11 +37,13 @@ aside {
             height: 0;
             width: 0;
             transition: .3s all ease-in-out;
+            display: none;
         }
         fa {
             margin: 0 .25rem;
             &:hover {
                 &+ span {
+                    display: inline;
                     opacity: 1;
                     height: auto;
                     width: auto;
@@ -93,6 +95,9 @@ input[type='file']{
 .btn-groups {
     display: flex;
     justify-content: center;
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+    }
 }
 .submit-btn {
     min-width: 150px;

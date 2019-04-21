@@ -91,6 +91,9 @@ aside {
        .head {
            padding: 1rem;
            background-color: transparent;
+           @media screen and (max-width: 768px) {
+                padding: 0;
+           }
        }
     }
 }

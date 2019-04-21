@@ -10,6 +10,9 @@ aside {
         p, label {
             color: $white;
             font-size: 1.1rem;
+            @media screen and (max-width: 768px) {
+                font-size: .8rem;
+            }
         }
         h1 {
             margin: 0 auto;
@@ -27,6 +30,10 @@ aside {
                 padding: 2rem;
                 color: $white;
                 border-radius: .5rem;
+                @media screen and (max-width: 768px) {
+                    max-width: 100%;
+                    padding: 1rem;
+                }
             }
             .form-group {
                 text-align: left;

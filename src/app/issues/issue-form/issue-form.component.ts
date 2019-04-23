@@ -58,7 +58,7 @@ export class IssueFormComponent implements OnInit {
       reporter: new FormControl(null, {validators: [Validators.required]}),
       assignee: new FormControl(null, {validators: [Validators.required]}),
       watchers: new FormControl(null, {validators: [Validators.required]}),
-      labels: new FormControl(null, {validators: [Validators.required]})
+      labels: new FormControl(null)
     });
   }
 
@@ -115,8 +115,11 @@ export class IssueFormComponent implements OnInit {
   }
 
   onFormSubmit() {
-    if (this.issueForm.invalid) {
-      return;
+    // tslint:disable-next-line:forin
+    for (let control in this.issueForm.controls) {
+      if (this.issueForm.controls[control].errors) {
+        return;
+      }
     }
     this.loaderService.start();
     let issue: Issue = {

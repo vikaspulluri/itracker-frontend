@@ -84,15 +84,17 @@ export class AuthService {
         this.loaderService.start();
         this.socialLogin(obj).subscribe(response => {
           if (response && response.data) {
-            this.loaderService.stop();
-            this.toastrService.success(response.message);
-            this.setAuthInfo(response);
-            const userData = {
-              authToken: this.getToken(),
-            };
-            this.socketService.setUser(userData);
-            this.socketService.setWatcher();
-            this.ngZone.run(() => this.router.navigate(['/dashboard']));
+            this.ngZone.run(() => {
+              this.loaderService.stop();
+              this.toastrService.success(response.message);
+              this.setAuthInfo(response);
+              const userData = {
+                authToken: this.getToken(),
+              };
+              this.socketService.setUser(userData);
+              this.socketService.setWatcher();
+              this.router.navigate(['/dashboard']);
+            });
           }
           this.loaderService.stop();
         }, err => {

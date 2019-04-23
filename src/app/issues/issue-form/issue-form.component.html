@@ -16,6 +16,10 @@
         <span>Title of the issue</span>
       </span>
       <input class="form-control" type="text" [formControlName]="'title'" placeholder="title">
+      <div *ngIf="issueForm.controls.title && (issueForm.controls.title.dirty || issueForm.controls.title.touched) && issueForm.controls.title.errors" class="alert alert-danger mt-1">
+        <span *ngIf="issueForm.controls.title.errors.required" class="error-message">Title is required!!!</span>
+        <span *ngIf="issueForm.controls.title.errors.minlength" class="error-message">Title should have min 3 characters!!!</span>
+      </div>
     </div>
     <!-- end title -->
 
@@ -24,9 +28,12 @@
       <label>Description</label>
       <span>
         <fa name="info-circle"></fa>
-        <span>Add some descripion about the issue</span>
+        <span>Add some description about the issue</span>
       </span>
       <textarea [froalaEditor]="textEditorConfig" formControlName="description" title="Description" class="form-control"></textarea>
+      <div *ngIf="issueForm.controls.description && issueForm.controls.description.errors && (issueForm.controls.description.dirty || issueForm.controls.description.touched)" class="alert alert-danger mt-1">
+        <span *ngIf="issueForm.controls.description.errors.required" class="error-message">Description is required!!!</span>
+      </div>
     </div>
     <!-- end description -->
 
@@ -98,6 +105,9 @@
         <tag-input-dropdown [autocompleteItems]="projects" [showDropdownIfEmpty]="true" [keepOpen]="false">
           </tag-input-dropdown>
       </tag-input>
+      <div *ngIf="issueForm.controls.project && issueForm.controls.project.errors && (issueForm.controls.project.dirty || issueForm.controls.project.touched)" class="alert alert-danger mt-1">
+        <span *ngIf="issueForm.controls.project.errors.required" class="error-message">Project is required!!!</span>
+      </div>
     </div>
     <!-- end project -->
 
@@ -121,6 +131,9 @@
         <tag-input-dropdown [autocompleteItems]="users" [showDropdownIfEmpty]="true" [keepOpen]="false">
           </tag-input-dropdown>
       </tag-input>
+      <div *ngIf="issueForm.controls.assignee && issueForm.controls.assignee.errors && (issueForm.controls.assignee.dirty || issueForm.controls.assignee.touched)" class="alert alert-danger mt-1">
+        <span *ngIf="issueForm.controls.assignee.errors.required" class="error-message">Assignee is required!!!</span>
+      </div>
     </div>
     <!-- end assignee -->
 

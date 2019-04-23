@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
   public username: string;
   public userFirstName: string;
   public userId: string;
-  public isRecommendationsPresent = true;
+  public isRecommendationsPresent = false;
   public issues;
   public hasOpenIssues;
   public searchTitle; // two way data binding with search bar value

@@ -43,7 +43,10 @@ export class ProjectFormComponent implements OnInit {
 
   onProjectCreate(form: NgForm, event: Event) {
     event.preventDefault();
-    if (form.invalid) { return; }
+    if (form.invalid) {
+      this.toastrService.error('All fields are required');
+      return;
+    }
     this.loaderService.start();
     const project: Project = {
       title: form.value.title,

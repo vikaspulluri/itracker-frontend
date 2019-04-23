@@ -198,6 +198,7 @@ export class UtilService {
         let start = moment(new Date(startDate));
         end = moment(end);
         const duration = moment.duration(end.diff(start));
+        const seconds = Math.floor(duration.asSeconds());
         const minutes = Math.floor(duration.asMinutes());
         const hours = Math.floor(duration.asHours());
         const days = Math.floor(duration.asDays());
@@ -213,6 +214,8 @@ export class UtilService {
             return `${hours} Hours`;
         } if (minutes && minutes > 0) {
             return `${minutes} Minutes`;
+        } if (seconds && seconds > 0) {
+            return `${seconds} Seconds`;
         }
         return null;
     }

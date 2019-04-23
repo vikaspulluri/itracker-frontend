@@ -48,6 +48,22 @@ export class AppHttpService {
         return this.http.post<ProjectsResponse>(`${this.config.apiUrl}/api/project/all`, filters);
     }
 
+    public addMemberToProject(projectId: string, user: SimpleUser) {
+        let obj = {
+            projectId: projectId,
+            user: user
+        };
+        return this.http.post<Response>(`${this.config.apiUrl}/api/project/add-member`, obj);
+    }
+
+    public removeMemberFromProject(projectId: string, userId: string) {
+        let obj = {
+            projectId: projectId,
+            userId: userId
+        };
+        return this.http.post<Response>(`${this.config.apiUrl}/api/project/remove-member`, obj);
+    }
+
     // ############################################################################### //
     // *************************** ISSUE MANAGEMENT ********************************* //
     // ############################################################################## //

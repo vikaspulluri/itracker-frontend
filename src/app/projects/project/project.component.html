@@ -34,10 +34,12 @@
             <tag-input [ngModel]="members" 
                         [placeholder]="'Add new member...'"
                         [secondaryPlaceholder]="'Add new member'"
-                        [onlyFromAutocomplete]="true" 
+                        [onlyFromAutocomplete]="true"
+                        (onRemove)="onRemoveMember($event)"
+                        (onAdd)="onAddMember($event)"
                         theme="foundation-theme" 
                         [maxItems]="activeProject?.ownerId == currentUserId ? users?.length : members?.length">
-                <tag-input-dropdown [autocompleteItems]="users" [showDropdownIfEmpty]="true">
+                <tag-input-dropdown [autocompleteItems]="users" [showDropdownIfEmpty]="true" [keepOpen]="false">
                   </tag-input-dropdown>
             </tag-input>
         </div>

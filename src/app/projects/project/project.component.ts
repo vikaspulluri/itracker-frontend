@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UtilService } from 'src/app/shared/util.service';
 import { AppHttpService } from 'src/app/shared/app-http.service';
-import { UsersResponse, ProjectResponse, IssueStatsResponse } from 'src/app/shared/response.interface';
+import { UsersResponse, ProjectResponse, IssueStatsResponse, SimpleUser } from 'src/app/shared/response.interface';
 import { ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Project } from 'src/app/shared/models';
@@ -85,6 +85,30 @@ export class ProjectComponent implements OnInit {
         done: response.data.issues.done || 0
       };
       this.loaderService.stop();
+    }, err => this.loaderService.stop());
+  }
+
+  onAddMember($event) {
+    this.loaderService.start();
+    let username = $event.display;
+    username = username.split(' ');
+    let member: SimpleUser = {
+      firstName: username[0],
+      lastName: username[1],
+      userId: $event.value
+    };
+    this.httpService.addMemberToProject(this.projectId$, member).subscribe(response => {
+      this.loaderService.stop();
+      this.toastrService.success(response.message);
+    }, err => this.loaderService.stop());
+  }
+
+  onRemoveMember($event) {
+    this.loaderService.start();
+    let userId = $event.value;
+    this.httpService.removeMemberFromProject(this.projectId$, userId).subscribe(response => {
+      this.loaderService.stop();
+      this.toastrService.success(response.message);
     }, err => this.loaderService.stop());
   }
 

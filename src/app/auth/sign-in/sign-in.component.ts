@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../shared/auth.service';
 import { ToastrService } from 'ngx-toastr';

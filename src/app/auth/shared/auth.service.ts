@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SocketService } from '../../shared/socket.service';
 import { authConfig } from '../auth.config';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 declare const gapi: any;
 
@@ -24,7 +25,7 @@ export class AuthService {
   private auth2;
 
   constructor(private http: HttpClient, private router: Router, private toastrService: ToastrService,
-    private socketService: SocketService, private ngZone: NgZone) {}
+    private socketService: SocketService, private ngZone: NgZone, private loaderService: NgxUiLoaderService) {}
 
   getToken() {
     return this.token;
@@ -66,7 +67,7 @@ export class AuthService {
     gapi.load('auth2', () => {
       this.auth2 = gapi.auth2.init(authConfig.googleAuthConfig);
       const signInBtn = document.getElementById('google-btn');
-      if (signInBtn) {this.attachGoogleAuthHandler(signInBtn);}
+      if (signInBtn) { this.attachGoogleAuthHandler(signInBtn); }
     });
   }
   public attachGoogleAuthHandler(element) {
@@ -80,8 +81,10 @@ export class AuthService {
           firstName: username[0],
           lastName: username[1]
         };
+        this.loaderService.start();
         this.socialLogin(obj).subscribe(response => {
           if (response && response.data) {
+            this.loaderService.stop();
             this.toastrService.success(response.message);
             this.setAuthInfo(response);
             const userData = {
@@ -91,7 +94,9 @@ export class AuthService {
             this.socketService.setWatcher();
             this.ngZone.run(() => this.router.navigate(['/dashboard']));
           }
+          this.loaderService.stop();
         }, err => {
+          this.loaderService.stop();
           console.log(err);
         });
       }, (error) => {

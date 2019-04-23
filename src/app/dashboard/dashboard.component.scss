@@ -70,6 +70,9 @@ aside {
     .action-btn {
         @include mainBtn();
         margin: 0 .5rem;
+        @media screen and (max-width: 768px) {
+            width: 100px;
+        }
     }
     .recommendations {
         margin: .5rem;

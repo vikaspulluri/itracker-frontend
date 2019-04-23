@@ -1,7 +1,7 @@
 export const config = {
     filtersForm: {
         userGroup: [
-            {display: 'All', value: null}
+            {display: 'All', value: 'all'}
         ],
         issueGroup: [
             {name: 'All', value: null},

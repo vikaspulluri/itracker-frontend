@@ -45,7 +45,7 @@
     </div>
     <div class="stats-container">
       <div class="stat-box all">
-        <a [routerLink]="['/issues']" [queryParams]="{projectId: projectId$, issueType: 'all'}">
+        <a [routerLink]="['/issues']" [queryParams]="{projectId: projectId$, issueType: 'all', userId: 'all'}">
           <div class="head">
             <h1>{{issueStats?.totalIssues}}</h1>
           </div>
@@ -55,7 +55,7 @@
         </a>
       </div>
       <div class="stat-box done">
-        <a [routerLink]="['/issues']" [queryParams]="{projectId: projectId$, issueType: 'done'}">
+        <a [routerLink]="['/issues']" [queryParams]="{projectId: projectId$, issueType: 'done', userId: 'all'}">
           <div class="head">
             <h1>{{issueStats?.done}}</h1>
           </div>
@@ -65,7 +65,7 @@
         </a>
       </div>
       <div class="stat-box in-qa">
-        <a [routerLink]="['/issues']" [queryParams]="{projectId: projectId$, issueType: 'qa'}">
+        <a [routerLink]="['/issues']" [queryParams]="{projectId: projectId$, issueType: 'qa', userId: 'all'}">
           <div class="head">
             <h1>{{issueStats?.qa}}</h1>
           </div>
@@ -75,7 +75,7 @@
         </a>
       </div>
       <div class="stat-box in-progress">
-        <a [routerLink]="['/issues']" [queryParams]="{projectId: projectId$, issueType: 'progress'}">
+        <a [routerLink]="['/issues']" [queryParams]="{projectId: projectId$, issueType: 'progress', userId: 'all'}">
           <div class="head">
             <h1>{{issueStats?.progress}}</h1>
           </div>
@@ -85,7 +85,7 @@
         </a>
       </div>
       <div class="stat-box todo">
-        <a [routerLink]="['/issues']" [queryParams]="{projectId: projectId$, issueType: 'backlog'}">
+        <a [routerLink]="['/issues']" [queryParams]="{projectId: projectId$, issueType: 'backlog', userId: 'all'}">
           <div class="head">
             <h1>{{issueStats?.backlog}}</h1>
           </div>

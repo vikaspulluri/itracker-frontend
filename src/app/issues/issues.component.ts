@@ -212,8 +212,9 @@ export class IssuesComponent implements OnInit {
     let issueGroup = formControls.issueGroup;
     let projectGroup = formControls.projectGroup;
     let labelGroup = formControls.labelGroup;
+    let userId = userGroup.get('userId').value === 'all' ? null : userGroup.get('userId').value;
     let filters = {
-      userId: userGroup.get('userId').value,
+      userId: userId,
       projectId: projectGroup.get('projectId').value,
       issueType: issueGroup.get('issueType').value,
       priority: priorityGroup.get('priority').value,

@@ -131,9 +131,9 @@ export class AuthService {
   }
   logout() {
     // tslint:disable-next-line:triple-equals
-    if (this.getIsSocialAuthUser() == 'true') {
-      gapi.auth2.getAuthInstance().auth2.signOut().then(() => console.log('signed out'));
-    }
+    // if (this.getIsSocialAuthUser() == 'true') {
+    //   gapi.auth2.getAuthInstance().auth2.signOut().then(() => console.log('signed out'));
+    // }
     this.token = null;
     this.isAuthenticated = false;
     this.authStatusListener.next(false);

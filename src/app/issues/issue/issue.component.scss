@@ -18,6 +18,29 @@ aside {
 
     h1 {
         padding: 0 .5rem;
+        display: inline-block;
+        + span {
+            color: $white;
+            cursor: pointer;
+        }
+    }
+    .edit-title-holder {
+        display: flex;
+        align-items: center;
+        @media screen and (max-width: 767px) {
+            justify-content: center;
+        }
+        input {
+            padding: .5rem;
+        }
+        .save {
+            color: $primary-green;
+            cursor: pointer;
+        }
+        .cancel {
+            color: $orange;
+            cursor: pointer;
+        }
     }
     
     .action-wrap {

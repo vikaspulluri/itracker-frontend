@@ -36,6 +36,8 @@ export class IssueComponent implements OnInit {
   public issueComment; // two way binding with comment editor
   public allComments; // holds all comments of issue
   public attachmentPreview; // attachment thumbnail
+  public isTitleEditing = false; // will be updated when user clicks on edit icon beside title
+  public backupTitle;
   constructor(private route: ActivatedRoute,
     private router: Router,
     private utilService: UtilService,
@@ -134,6 +136,7 @@ export class IssueComponent implements OnInit {
   // ############################################################################### //
   // ************************* USER INTERACTION METHODS **************************** //
   // ############################################################################## //
+
   onUpdateAssignee($event, isSaveBtn = false) {
     if ($event) {
       this.issueDetails.formAssignee[0].display = $event.display;
@@ -272,18 +275,19 @@ export class IssueComponent implements OnInit {
     this.loaderService.start();
     this.issueDetails.priority = $event.target.value;
     this.httpService.updateIssue(this.issueDetails.issueId, 'priority', this.issueDetails.priority).subscribe(response => {
-    this.loaderService.stop();
-    const defaultMsg = `*** has updated priority to ${this.issueDetails.priority} for ###`;
-    // realtime message to watchers
-    const receivers = this.getNotificationReceivers();
-    this.utilService.sendNotification(defaultMsg, 'issue',
-                    {id: this.issueDetails.issueId, title: this.issueDetails.title}, receivers, 'high');
-    this.updateIssueActivity(this.issueDetails.issueId,
+      this.loaderService.stop();
+      const defaultMsg = `*** has updated priority to ${this.issueDetails.priority} for ###`;
+      // realtime message to watchers
+      const receivers = this.getNotificationReceivers();
+      this.utilService.sendNotification(defaultMsg, 'issue',
+                      {id: this.issueDetails.issueId, title: this.issueDetails.title}, receivers, 'high');
+      this.updateIssueActivity(this.issueDetails.issueId,
         `${this.authService.getUsername()} updated priority to ${this.issueDetails.priority}`);
   }, err => this.loaderService.stop());
   }
 
   onStatusChange($event) {
+    this.loaderService.start();
     this.issueDetails.status = $event.target.value;
     this.httpService.updateIssue(this.issueDetails.issueId, 'status', this.issueDetails.status).subscribe(response => {
       this.loaderService.stop();
@@ -304,6 +308,13 @@ export class IssueComponent implements OnInit {
     this.httpService.updateIssue(this.issueId, 'description', updatedDescription).subscribe(response => {
       this.loaderService.stop();
       this.toastrService.success(response.message);
+      const defaultMsg = `*** has updated description to ${this.issueDetails.description} for ###`;
+      // realtime message to watchers
+      const receivers = this.getNotificationReceivers();
+      this.utilService.sendNotification(defaultMsg, 'issue',
+                      {id: this.issueDetails.issueId, title: this.issueDetails.title}, receivers, 'high');
+      this.updateIssueActivity(this.issueDetails.issueId,
+          `${this.authService.getUsername()} has updated the description`);
     }, err => this.loaderService.stop());
   }
 
@@ -323,6 +334,38 @@ export class IssueComponent implements OnInit {
       this.allComments.unshift(comment);
       this.issueComment = '';
     }, err => this.loaderService.stop());
+  }
+
+  onEditTitleIcon() {
+    this.isTitleEditing = true;
+    this.backupTitle = this.issueDetails.title;
+  }
+
+  onUpdateTitle() {
+    if (this.issueDetails.title === '' || typeof this.issueDetails.title === 'undefined') {
+      return;
+    }
+    if (this.issueDetails.title && this.issueDetails.title.length < 3) {
+      this.toastrService.error('Title should have minimum 3 characters!!!');
+      return;
+    }
+    this.loaderService.start();
+    this.httpService.updateIssue(this.issueId, 'title', this.issueDetails.title).subscribe(response => {
+      this.loaderService.stop();
+      this.isTitleEditing = false;
+      const defaultMsg = `*** has updated title to ${this.issueDetails.title} for ###`;
+      // realtime message to watchers
+      const receivers = this.getNotificationReceivers();
+      this.utilService.sendNotification(defaultMsg, 'issue',
+                      {id: this.issueDetails.issueId, title: this.issueDetails.title}, receivers, 'high');
+      this.updateIssueActivity(this.issueDetails.issueId,
+          `${this.authService.getUsername()} updated the title to ${this.issueDetails.title}`);
+    }, err => this.loaderService.stop());
+  }
+
+  onCancelUpdateTitle() {
+    this.issueDetails.title = this.backupTitle;
+    this.isTitleEditing = false;
   }
 
 

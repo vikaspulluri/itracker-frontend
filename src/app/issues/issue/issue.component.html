@@ -11,6 +11,16 @@
         </a>
       </h3>
       <h1>{{ issueDetails.title }}</h1>
+      <span *ngIf="isReporter()" class="edit" (click)="onEditTitleIcon()">
+        <fa name="edit"></fa>
+      </span>
+      <div *ngIf="isTitleEditing" class="edit-title-holder">
+        <input type="text" name="edit-title" [(ngModel)]="issueDetails.title">
+        <span>
+          <span class="fa-wrap"><fa name="check" size="2x" class="save" (click)="onUpdateTitle()"></fa></span>
+          <span class="fa-wrap"><fa name="times" size="2x" class="cancel" (click)="onCancelUpdateTitle()"></fa></span>
+        </span>
+      </div>
       <h2>
         <a [routerLink]="['/project', issueDetails.project.projectId]" title="{{issueDetails.project.title}}">
           <span><fa name="free-code-camp"></fa></span>

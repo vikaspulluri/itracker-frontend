@@ -168,11 +168,13 @@ export class IssueComponent implements OnInit {
 
       // need to update watchers list also since new assignee here
       let currentWatchers = this.issueDetails.formWatchers || [];
-      let currentAssignee = this.issueDetails.formAssignee[0];
+      let currentAssignee = Object.assign({}, this.issueDetails.formAssignee[0]);
       let isAssigneeAlreadyWatching = currentWatchers.find(user => user.value === currentAssignee.value);
       if (!isAssigneeAlreadyWatching) {
         currentAssignee.readonly = true;
         this.onAddWatcher(currentAssignee);
+      } else {
+        isAssigneeAlreadyWatching.readonly = true;
       }
     }
   }

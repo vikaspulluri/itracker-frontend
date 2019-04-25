@@ -43,6 +43,7 @@ export class ContactUsComponent implements OnInit {
       this.toastrService.success(response.message);
       this.loaderService.stop();
       contactForm.reset();
+      this.query = this.queries[0].value;
     }, err => this.loaderService.stop());
   }
 

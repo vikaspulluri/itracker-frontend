@@ -1,27 +1,30 @@
-# IssueTrackerFrontend
+# [Issue Tracker Application](http://itracker.meanpro.com/) by [Meanpro](http://www.meanpro.com/)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.3.
+## Problem Statement
 
-## Development server
+This project should be a ready to deploy, Issue Tracking Tool. It must have all the features mentioned below and it must be deployed on a server before submission. You are allowed to use any kind of modules, libraries and tool you want.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### Features
+  #### User Management
+    * Sign In user
+    * Register User
+    * Allow Social Authentication
+    * Recovery Forgot Password
+  #### Project Management
+    * User can create project
+    * Project creator can manage members in it
+    * Project Statistics
+  #### Issue Management
+    * User can manage issues by performing CRUD operations on it
+    * Issue privilieges can be different depends upon the user
+    * Full flexibility in filtering the issues
+    * Personalized dashboard
+    * User can able to search the issue by title
+    * Any user can watch the issue
+    * User can add comments to it
+    * Realtime activity updates
+  #### Notification Management
+    * User can see realtime updates regarding the issue he's been watching or assigned or reported
+  
+## Solution
+  ### http://itracker.meanpro.com/
